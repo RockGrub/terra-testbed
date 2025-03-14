@@ -8,7 +8,7 @@
 %define         llvm_compat 19
 %endif
 %global         llvm_version 19.0.0
-%global         prerelease dev.3462+edabcf619
+%global         prerelease dev.56+d0911786c
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond macro     %{without bootstrap}
@@ -45,7 +45,7 @@
 }
 
 Name:           zig-nightly
-Version:        0.14.0
+Version:        0.15.0
 %if "%{prerelease}" == "1"
 Release:        1%{?dist}
 %else
