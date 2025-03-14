@@ -82,6 +82,7 @@ BuildRequires:  lld%{?llvm_compat}-devel
 BuildRequires:  zlib-devel
 BuildConflicts: llvm
 BuildConflicts: llvm-devel
+BuildConflicts: clang-devel
 # for man page generation
 BuildRequires:  help2man
 # for signature verification
