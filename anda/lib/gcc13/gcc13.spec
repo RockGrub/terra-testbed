@@ -1,5 +1,3 @@
-%global build_cflags %{__build_flags_lang_c} %{?_distro_extra_cflags} -fuse-ld=mold
-%global build_cxxflags %{__build_flags_lang_cxx} %{?_distro_extra_cxxflags} -fuse-ld=mold
 %global DATE 20240611
 %global gitrev 03b1a31f9807251f378fcecb29c4669eed357eb2
 %global gcc_version 13.3.1
@@ -184,7 +182,7 @@ export CONFIG_SITE=NONE
 
 CC=gcc
 CXX=g++
-OPT_FLAGS="%{optflags}"
+OPT_FLAGS="%{optflags} -fuse-ld=mold"
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=[123]//g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/\(-Wp,\)\?-D_FORTIFY_SOURCE=[123]//g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/\(-Wp,\)\?-U_FORTIFY_SOURCE//g'`
