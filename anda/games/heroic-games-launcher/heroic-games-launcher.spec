@@ -64,7 +64,7 @@ pnpm dist:linux
 
 %install
 mkdir -p %{buildroot}%{_datadir}/%{shortname}
-mv $(find . -name "*LICENSE*" -not -path "./node_modules/*" -and -not -path "./public/*") .
+mv $(find . -iname "*LICENSE*" -not -path "./node_modules/*" -and -not -path "./public/*") .
 %ifarch aarch64
 ### Needs testing once aarch64 Heroic is complete:
 #rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/x64
