@@ -8,6 +8,7 @@
 %define _build_id_links none
 %global org_name Heroic-Games-Launcher
 %global git_name %(echo %{org_name} | sed 's/-//g')
+%global reverse_dns com.heroicgameslauncher.hgl
 %global shortname heroic
 %global legendary_version 0.20.36
 %global gogdl_version 1.1.2
@@ -52,8 +53,8 @@ Heroic is a Free and Open Source Epic, GOG, and Amazon Prime Games launcher for 
 %prep
 rm -rf ./*
 %git_clone https://github.com/%{org_name}/%{git_name} v%{version}
-sed -i 's/Exec=.*%u/Exec=\/usr\/share\/%{shortname}\/%{shortname} %U/g' flatpak/com.heroicgameslauncher.hgl.desktop
-sed -i 's/Icon=.*/Icon=%{shortname}/g' flatpak/com.heroicgameslauncher.hgl.desktop
+sed -i 's/Exec=.*%u/Exec=\/usr\/share\/%{shortname}\/%{shortname} %U/g' flatpak/%{reverse_dns}.desktop
+sed -i 's/Icon=.*/Icon=%{shortname}/g' flatpak/%{reverse_dns}.desktop
 
 %build
 pnpm install
@@ -83,7 +84,7 @@ install -Dm644 dist/.icon-set/icon_128x128.png %{buildroot}%{_iconsdir}/hicolor/
 install -Dm644 dist/.icon-set/icon_256x256.png %{buildroot}%{_iconsdir}/hicolor/256x256/%{shortname}.png
 install -Dm644 dist/.icon-set/icon_512x512.png %{buildroot}%{_iconsdir}/hicolor/512x512/%{shortname}.png
 install -Dm644 dist/.icon-set/icon_1024.png %{buildroot}%{_iconsdir}/hicolor/1024x1024/%{shortname}.png
-install -Dm644 flatpak/com.heroicgameslauncher.hgl.desktop %{buildroot}%{_datadir}/applications/%{shortname}.desktop
+install -Dm644 flatpak/%{reverse_dns}.desktop %{buildroot}%{_datadir}/applications/%{shortname}.desktop
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{shortname}.desktop
