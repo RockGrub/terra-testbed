@@ -66,7 +66,7 @@ mv $(find . -iname "*LICENSE*" -not -path "./node_modules/*" -and -not -path "./
 %ifarch aarch64
 ### Needs testing once aarch64 Heroic is complete:
 #rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/x64
-mv dist/linux-arm64-unpacked/* %{buildroot}%{_datadir}/heroic
+mv dist/linux-arm64-unpacked/* %{buildroot}%{_datadir}/%{shortname}
 %else
 rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/arm64
 mv dist/linux-unpacked/* %{buildroot}%{_datadir}/%{shortname}
