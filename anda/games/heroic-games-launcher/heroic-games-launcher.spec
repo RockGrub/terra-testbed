@@ -40,8 +40,6 @@ Requires:      which
 Recommends:    gamemode
 Recommends:    mangohud
 Recommends:    umu-launcher
-# Easier install
-Provides:      %{shortname} = %{version}-%{release}
 Provides:      bundled(comet) = %{comet_version}
 Provides:      bundled(gogdl) = %{gogdl_version}
 Provides:      bundled(legendary) = %{legendary_version}
