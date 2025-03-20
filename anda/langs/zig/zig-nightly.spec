@@ -61,8 +61,8 @@ Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14
 # any trouble because of packaging demands
 # https://github.com/ziglang/zig/pull/22516
 Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
-BuildRequires:  gcc
-BuildRequires:  gcc-c++
+BuildRequires:  gcc14
+BuildRequires:  gcc14-c++
 BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
