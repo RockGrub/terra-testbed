@@ -11,7 +11,6 @@
 %global         ver 0.15.0-dev.75+03123916e
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
-%bcond macro     %{without bootstrap}
 %bcond test      1
 %if 0%{?fedora} <= 40
 %global zig_cache_dir %{_builddir}/zig-cache
@@ -52,7 +51,6 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
-Source2:        https://src.fedoraproject.org/rpms/zig/raw/rawhide/f/macros.zig
 # Remove native lib directories from rpath
 # this is unlikely to be upstreamed in its current state because upstream
 # wants to work around the shortcomings of NixOS
@@ -122,21 +120,13 @@ Requires:       %{name} = %{version}
 Documentation for Zig. For more information, visit %{url}
 %endif
 
-%if %{with macro}
-%package        rpm-macros
-Summary:        Common RPM macros for Zig
-Requires:       rpm
-BuildArch:      noarch
-
-%description    rpm-macros
-This package contains common RPM macros for Zig.
-%endif
-
 %prep
 /usr/bin/minisign -V -m %{SOURCE0} -x %{SOURCE1} -P %{public_key}
 %autosetup -p1 -n zig-%{ver}
 
 %build
+export CC=gcc14
+export CXX=gcc14-c++
 
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
@@ -212,11 +202,6 @@ install -D -pv -m 0644 %{SOURCE2} %{buildroot}%{_rpmmacrodir}/macros.%{name}
 %doc README.md
 %doc zig-out/doc/langref.html
 %doc zig-out/doc/std
-%endif
-
-%if %{with macro}
-%files rpm-macros
-%{_rpmmacrodir}/macros.zig
 %endif
 
 %changelog
