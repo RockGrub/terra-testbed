@@ -61,8 +61,8 @@ Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14
 # any trouble because of packaging demands
 # https://github.com/ziglang/zig/pull/22516
 Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
-BuildRequires:  gcc-14
-BuildRequires:  gcc++-14
+BuildRequires:  gcc14
+BuildRequires:  gcc14-c++
 BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
@@ -125,8 +125,8 @@ Documentation for Zig. For more information, visit %{url}
 %autosetup -p1 -n zig-%{ver}
 
 %build
-export CC=gcc14
-export CXX=gcc14-c++
+export CC=gcc-14
+export CXX=gcc++-14
 
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
