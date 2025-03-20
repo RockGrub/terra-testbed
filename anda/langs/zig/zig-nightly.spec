@@ -127,8 +127,8 @@ Documentation for Zig. For more information, visit %{url}
 %build
 export CC=gcc-14
 export CXX=g++-14
-export CFLAGS="$CFLAGS -std=c19 -std=gnu19"
-export CXXFLAGS="$CXXFLAGS -std=c++17 -std=gnu++17"
+export CFLAGS="$CFLAGS -std=gnu17"
+export CXXFLAGS="$CXXFLAGS -std=gnu++17"
 
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
