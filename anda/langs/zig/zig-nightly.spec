@@ -54,15 +54,15 @@ Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
 # Remove native lib directories from rpath
 # this is unlikely to be upstreamed in its current state because upstream
 # wants to work around the shortcomings of NixOS
-Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0001-remove-native-lib-directories-from-rpath.patch
+Patch0:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0001-remove-native-lib-directories-from-rpath.patch
 # Adds a build option for setting the build-id
 # some projects are not programmed to handle a build-id's
 # by having it as a flag we can make sure no developer runs into
 # any trouble because of packaging demands
 # https://github.com/ziglang/zig/pull/22516
-Patch:          https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
-BuildRequires:  gcc14
-BuildRequires:  gcc14-c++
+Patch1:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
@@ -125,9 +125,6 @@ Documentation for Zig. For more information, visit %{url}
 %autosetup -p1 -n zig-%{ver}
 
 %build
-export CC=clang-19
-export CXX=clang++-19
-
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
 
