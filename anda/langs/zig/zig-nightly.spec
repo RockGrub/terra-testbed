@@ -50,16 +50,17 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
+Patch0:         stupidest-workaround.patch
 # Remove native lib directories from rpath
 # this is unlikely to be upstreamed in its current state because upstream
 # wants to work around the shortcomings of NixOS
-Patch0:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0001-remove-native-lib-directories-from-rpath.patch
+Patch1:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0001-remove-native-lib-directories-from-rpath.patch
 # Adds a build option for setting the build-id
 # some projects are not programmed to handle a build-id's
 # by having it as a flag we can make sure no developer runs into
 # any trouble because of packaging demands
 # https://github.com/ziglang/zig/pull/22516
-Patch1:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
+Patch2:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
@@ -144,9 +145,9 @@ Documentation for Zig. For more information, visit %{url}
     -DZIG_VERSION:STRING="%{ver}"
 
 %if %{with bootstrap}
-%cmake_build --target stage3 --release=safe
+%cmake_build --target stage3
 %else
-%cmake_build --target zigcpp --release=safe
+%cmake_build --target zigcpp
 zig build %{zig_build_options}
 
 # Zig has no official manpage
