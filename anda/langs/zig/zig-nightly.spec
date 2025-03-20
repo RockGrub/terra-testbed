@@ -144,9 +144,9 @@ Documentation for Zig. For more information, visit %{url}
     -DZIG_VERSION:STRING="%{ver}"
 
 %if %{with bootstrap}
-%cmake_build --target stage3 -DZIG_EXTRA_BUILD_ARGS:STRING="--release=safe"
+%cmake_build --target stage3 --release=safe
 %else
-%cmake_build --target zigcpp -DZIG_EXTRA_BUILD_ARGS:STRING="--release=safe"
+%cmake_build --target zigcpp --release=safe
 zig build %{zig_build_options}
 
 # Zig has no official manpage
