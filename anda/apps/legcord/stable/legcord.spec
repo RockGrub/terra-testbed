@@ -43,9 +43,9 @@ EOF
 
 
 %build
-pnpm install --no-frozen-lockfile
-pnpm run packageQuick
-
+NODE_ENV=development pnpm install --ignore-scripts
+pnpm run build
+pnpm -c exec "electron-builder --linux dir --publish never"
 
 %install
 install -Dm644 dist/*-unpacked/resources/app.asar %buildroot/usr/share/legcord/app.asar
