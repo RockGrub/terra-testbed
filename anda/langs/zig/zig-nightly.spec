@@ -8,7 +8,7 @@
 %define         llvm_compat 19
 %endif
 %global         llvm_version 19.0.0
-%global         prerelease dev.56+d0911786c
+%global         prerelease dev.75+03123916e
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond macro     %{without bootstrap}
