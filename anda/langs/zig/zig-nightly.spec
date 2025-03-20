@@ -25,7 +25,6 @@
     -Dtarget=native \
     -Dcpu=baseline \
     --zig-lib-dir lib \
-    --build-id=sha1 \
     \
     --cache-dir "%{zig_cache_dir}" \
     --global-cache-dir "%{zig_cache_dir}" \
