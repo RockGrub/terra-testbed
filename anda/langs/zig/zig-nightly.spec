@@ -8,7 +8,7 @@
 %define         llvm_compat 19
 %endif
 %global         llvm_version 19.0.0
-%global         prerelease dev.75+03123916e
+%global         ver 0.15.0-dev.75+03123916e
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond macro     %{without bootstrap}
@@ -45,22 +45,13 @@
 }
 
 Name:           zig-nightly
-Version:        0.15.0
-%if "%{prerelease}" == "1"
+Version:        %(echo %{ver} | sed 's/-/~/g')
 Release:        1%{?dist}
-%else
-Release:        0^%{prerelease}%{?dist}
-%endif
 Summary:        Programming language for maintaining robust, optimal, and reusable software
 License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GCC-exception-2.0 AND GPL-2.0-or-later AND GPL-2.0-or-later WITH GCC-exception-2.0 AND BSD-3-Clause AND Inner-Net-2.0 AND ISC AND LicenseRef-Fedora-Public-Domain AND GFDL-1.1-or-later AND ZPL-2.1
 URL:            https://ziglang.org
-%if "%{prerelease}" == "1"
-Source0:        %{url}/builds/zig-%{version}.tar.xz
-Source1:        %{url}/builds/zig-%{version}.tar.xz.minisig
-%else
-Source0:        %{url}/builds/zig-%{version}-%{prerelease}.tar.xz
-Source1:        %{url}/builds/zig-%{version}-%{prerelease}.tar.xz.minisig
-%endif
+Source0:        %{url}/builds/zig-%{ver}.tar.xz
+Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
 Source2:        https://src.fedoraproject.org/rpms/zig/raw/rawhide/f/macros.zig
 # Remove native lib directories from rpath
 # this is unlikely to be upstreamed in its current state because upstream
@@ -143,12 +134,7 @@ This package contains common RPM macros for Zig.
 
 %prep
 /usr/bin/minisign -V -m %{SOURCE0} -x %{SOURCE1} -P %{public_key}
-
-%if "%{prerelease}" == "1"
-%autosetup -p1 -n zig-%{version}
-%else
-%autosetup -p1 -n zig-%{version}-%{prerelease}
-%endif
+%autosetup -p1 -n zig-%{ver}
 
 %build
 
@@ -169,7 +155,7 @@ This package contains common RPM macros for Zig.
     -DZIG_TARGET_MCPU:STRING=baseline \
     -DZIG_TARGET_TRIPLE:STRING=native \
     \
-    -DZIG_VERSION:STRING="%{version}"
+    -DZIG_VERSION:STRING="%{ver}"
 
 %if %{with bootstrap}
 %cmake_build --target stage3
