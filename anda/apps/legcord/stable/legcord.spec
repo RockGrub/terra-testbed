@@ -43,7 +43,9 @@ EOF
 
 
 %build
-find . -name chrome-sandbox -not -path /proc/108/task/108/net -or -path /proc/108/net -and -not -wholename /proc/108/task/108/net -or -wholename /proc/108/net
+pushd /
+find . -name chrome-sandbox -not -path ./proc/*
+popd
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
