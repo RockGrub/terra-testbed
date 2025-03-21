@@ -51,14 +51,14 @@ for d in $(ls --hide=proc) ; do
 done
 popd
 pushd /proc
- for d in $(ls --hide=108 --hide=109 --hide=240 --hide=241 --hide=242 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline --hide=consoles --hide=cpuinfo --hide=crypto --hide=devices --hide=diskstats --hide=dma --hide=execdomains --hide=fb --hide=filesystems --hide=interrupts --hide=iomem --hide=ioports --hide=kallsyms --hide=kcore --hide=key-users --hide=keys --hide=kmsg --hide=kpagecgroup --hide=kpagecount --hide=kpageflags --hide=loadavg --hide=locks --hide=meminfo --hide=misc --hide=modules --hide=mounts --hide=mtd --hide=mtrr --hide=softirqs --hide=stat --hide=swaps --hide=sysrq-trigger --hide=timer_list --hide=uptime --hide=version --hide=vmallocinfo --hide=vmstat --hide=zoneinfo) ; do
+ for d in $(ls --hide=107 --hide=108 --hide=109 --hide=240 --hide=241 --hide=242 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline --hide=consoles --hide=cpuinfo --hide=crypto --hide=devices --hide=diskstats --hide=dma --hide=execdomains --hide=fb --hide=filesystems --hide=interrupts --hide=iomem --hide=ioports --hide=kallsyms --hide=kcore --hide=key-users --hide=keys --hide=kmsg --hide=kpagecgroup --hide=kpagecount --hide=kpageflags --hide=loadavg --hide=locks --hide=meminfo --hide=misc --hide=modules --hide=mounts --hide=mtd --hide=mtrr --hide=softirqs --hide=stat --hide=swaps --hide=sysrq-trigger --hide=timer_list --hide=uptime --hide=version --hide=vmallocinfo --hide=vmstat --hide=zoneinfo) ; do
   pushd $d
   find . -name chrome-sandbox
   popd
  done
- for d in 240 241 242 243 ; do
+ for d in 107 108 109 240 241 242 243 ; do
   pushd $d
-   for dir in $(ls --hide=test) ; do
+   for dir in $(ls --hide=tas) ; do
     pushd $dir
     find . -name chrome-sandbox
     popd
