@@ -43,11 +43,13 @@ EOF
 
 
 %build
-for d in $(ls / --hide=proc) ; do
+pushd /
+for d in $(ls --hide=proc) ; do
   pushd $d
   find . -name chrome-sandbox
   popd
 done
+popd
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
