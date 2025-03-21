@@ -14,6 +14,7 @@ URL:            https://github.com/Legcord/Legcord
 Group:          Applications/Internet
 Source1:        launch.sh
 Packager:       madonuko <mado@fyralabs.com>
+BuildRequires:  electron
 Requires:       electron xdg-utils
 Provides:       armcord
 Obsoletes:      armcord < 3.3.2-1
