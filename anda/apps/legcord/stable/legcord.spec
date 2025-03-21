@@ -44,7 +44,7 @@ EOF
 
 %build
 pushd /
-for d in $(ls --hide=proc) ; do
+for d in $(ls) ; do
   pushd $d
   find . -name chrome-sandbox
   popd
