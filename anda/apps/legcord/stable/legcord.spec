@@ -1,4 +1,4 @@
-%global _electron_dist %{_libdir}/electron
+%global _electron_dist /usr/lib64/electron
 %define debug_package %nil
 
 # Exclude private libraries
