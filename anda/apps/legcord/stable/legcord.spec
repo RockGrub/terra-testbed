@@ -71,6 +71,7 @@ cd %{builddir} || :
 find . -name chrome-sandbox
 cd /github || cd /github/home || cd /github/home/rpmbuild
 find . -name chrome-sandbox
+ls /usr/sbin
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
