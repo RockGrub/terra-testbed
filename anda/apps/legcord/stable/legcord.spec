@@ -56,7 +56,7 @@ pushd /proc
   find . -name chrome-sandbox
   popd
 done
-for f in 241 242 243 arch_status bootconfig buddyinfo cgroups cmdline consoles cpuinfo crypto devices diskstats dma
+for f in 240 241 242 243 arch_status bootconfig buddyinfo cgroups cmdline consoles cpuinfo crypto devices diskstats dma
   do cat $f
 done
 popd
