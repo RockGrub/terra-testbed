@@ -1,3 +1,4 @@
+%global _electron_dist %{_libdir}/electron
 %define debug_package %nil
 
 # Exclude private libraries
@@ -13,12 +14,12 @@ URL:            https://github.com/Legcord/Legcord
 Group:          Applications/Internet
 Source1:        launch.sh
 Packager:       madonuko <mado@fyralabs.com>
+BuildRequires:  electron
 Requires:       electron xdg-utils
 Provides:       armcord
 Obsoletes:      armcord < 3.3.2-1
 Conflicts:      legcord-bin
 Conflicts:      legcord-nightly
-BuildArch:      noarch
 BuildRequires:  anda-srpm-macros pnpm
 
 %description
@@ -43,18 +44,17 @@ EOF
 
 
 %build
-pnpm install --no-frozen-lockfile
-pnpm run packageQuick
-
+export NODE_ENV=production
+NODE_ENV=development pnpm install --ignore-scripts
+pnpm run build
+pnpm -c exec "electron-builder --linux dir --publish never -c.electronDist=%{_electron_dist} -c.electronVersion=$(cat %_electron_dist/version)"
 
 %install
-install -Dm644 dist/*-unpacked/resources/app.asar %buildroot/usr/share/legcord/app.asar
+install -Dm644 dist/*-unpacked/resources/app.asar %buildroot%_datadir/legcord/app.asar
 
 install -Dm755 %SOURCE1 %buildroot/usr/bin/legcord
 install -Dm644 legcord.desktop %buildroot/usr/share/applications/LegCord.desktop
 install -Dm644 build/icon.png %buildroot/usr/share/pixmaps/legcord.png
-
-ln -s %_datadir/legcord %buildroot%_datadir/armcord
 
 # HACK: rpm bug for unability to replace existing files on system.
 %pre
@@ -68,7 +68,7 @@ fi
 %license license.txt
 /usr/bin/legcord
 /usr/share/applications/LegCord.desktop
-/usr/share/pixmaps/legcord.png
+/usr/share/pixmaps/%{name}.png
 /usr/share/legcord/app.asar
 /usr/share/armcord
 
