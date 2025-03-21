@@ -1,3 +1,4 @@
+%global _electron_dist %{buildroot}%{_libdir}/electron
 %define debug_package %nil
 
 # Exclude private libraries
@@ -43,9 +44,10 @@ EOF
 
 
 %build
+export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
-pnpm -c exec "electron-builder --linux dir --publish never"
+pnpm -c exec "electron-builder --linux dir --publish never -c.electronDist=%{_electron_dist} -c.electronVersion=$(cat %_electron_dist/version)"
 
 %install
 install -Dm644 dist/*-unpacked/resources/app.asar %buildroot/usr/share/legcord/app.asar
