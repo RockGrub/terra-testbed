@@ -64,6 +64,7 @@ pushd /proc
    done
  popd
 popd
+mkdir -p %{buildroot}
 cd %{buildroot} || :
 find . -name chrome-sandbox
 cd %{builddir} || :
