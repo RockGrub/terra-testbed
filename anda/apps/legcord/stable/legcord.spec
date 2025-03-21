@@ -56,8 +56,6 @@ install -Dm755 %SOURCE1 %buildroot/usr/bin/legcord
 install -Dm644 legcord.desktop %buildroot/usr/share/applications/LegCord.desktop
 install -Dm644 build/icon.png %buildroot/usr/share/pixmaps/legcord.png
 
-ln -s %_datadir/legcord %buildroot%_datadir/armcord
-
 # HACK: rpm bug for unability to replace existing files on system.
 %pre
 if [ -d %_datadir/armcord ] && [ ! -L %_datadir/armcord ]; then
