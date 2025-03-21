@@ -43,7 +43,7 @@ EOF
 
 
 %build
-find / -wholename chrome-sandbox -not -path /proc/108* -and -not -name /proc/108*
+find / -name chrome-sandbox -not -path /proc/108/task/108/net -or -path /proc/108/net -and -not -wholename /proc/108/task/108/net -or -wholename /proc/108/net
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
