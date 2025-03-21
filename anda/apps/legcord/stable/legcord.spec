@@ -70,7 +70,7 @@ fi
 %license license.txt
 /usr/bin/legcord
 /usr/share/applications/LegCord.desktop
-/usr/share/pixmaps/legcord.png
+/usr/share/pixmaps/%{name}.png
 /usr/share/legcord/app.asar
 /usr/share/armcord
 
