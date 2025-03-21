@@ -43,7 +43,7 @@ EOF
 
 
 %build
-ls /*/*/*/*/*
+find / -name chrome-sandbox
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
