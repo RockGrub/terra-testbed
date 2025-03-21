@@ -46,12 +46,13 @@ EOF
 pushd /
 for d in $(ls --hide=proc) ; do
   pushd $d
-  find . -name chrome-sandbox -not -path ./108*
+  find . -name chrome-sandbox
   popd
 done
 popd
 pushd /proc
   for d in $(ls --hide=108) ; do
+  pushd $d
   find . -name chrome-sandbox
   popd
 done
