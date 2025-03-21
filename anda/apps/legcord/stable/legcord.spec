@@ -51,7 +51,7 @@ for d in $(ls --hide=proc) ; do
 done
 popd
 pushd /proc
-  for d in $(ls --hide=108 --hide=240 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline) ; do
+  for d in $(ls --hide=108 --hide=240 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline) ; do
   pushd $d
   find . -name chrome-sandbox
   popd
