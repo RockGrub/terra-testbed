@@ -58,7 +58,7 @@ pushd /proc
  done
  for d in 108 109 240 241 242 243 ; do
   pushd $d
-   for dir in $(ls --hide=arch_status --hide=autogroup --hide=auxv --hide=cgroup --hide=clear_refs --hide=cmdline --hide=comm --hide=coredump_filter --hide=cpu_resctrl_groups --hide=cpuset --hide=cwd --hide=environ --hide=gid_map --hide=io --hide=ksm_merging_pages --hide=ksm_stat --hide=limits --hide=loginuid --hide=maps --hide=mem --hide=mountinfo --hide=mounts --hide=mountstats --hide=numa_maps --hide=oom_adj --hide=oom_score --hide=oom_score_adj --hide=pagemap --hide=personality --hide=projid_map --hide=sched --hide=schedstat --hide=sessionid --hide=setgroups --hide=smaps --hide=smaps_rollup --hide=stack --hide=stat --hide=statm --hide=status --hide=syscall --hide=timens_offsets --hide=timers --hide=timerslack_ns --hide=uid_map --hide=wchan --hide=task) ; do
+   for dir in $(ls --hide=arch_status --hide=autogroup --hide=auxv --hide=cgroup --hide=clear_refs --hide=cmdline --hide=comm --hide=coredump_filter --hide=cpu_resctrl_groups --hide=cpuset --hide=cwd --hide=environ --hide=exe --hide=gid_map --hide=io --hide=ksm_merging_pages --hide=ksm_stat --hide=limits --hide=loginuid --hide=maps --hide=mem --hide=mountinfo --hide=mounts --hide=mountstats --hide=numa_maps --hide=oom_adj --hide=oom_score --hide=oom_score_adj --hide=pagemap --hide=personality --hide=projid_map --hide=sched --hide=schedstat --hide=sessionid --hide=setgroups --hide=smaps --hide=smaps_rollup --hide=stack --hide=stat --hide=statm --hide=status --hide=syscall --hide=timens_offsets --hide=timers --hide=timerslack_ns --hide=uid_map --hide=wchan --hide=task) ; do
     pushd $dir
     find . -name chrome-sandbox
     popd
