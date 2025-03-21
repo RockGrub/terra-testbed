@@ -56,7 +56,7 @@ pushd /proc
   find . -name chrome-sandbox
   popd
  done
- for d in 107 108 109 240 241 242 243 ; do
+ for d in 108 109 240 241 242 243 ; do
   pushd $d
    for dir in $(ls --hide=task) ; do
     pushd $dir
