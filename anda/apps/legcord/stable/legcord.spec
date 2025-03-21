@@ -43,7 +43,7 @@ EOF
 
 
 %build
-ls /*/*/*/*/*/*
+ls /*/*/*/*/*
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
