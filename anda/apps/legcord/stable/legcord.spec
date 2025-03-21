@@ -46,7 +46,7 @@ EOF
 pushd /
 for d in $(ls) ; do
   pushd $d
-  find . -name chrome-sandbox
+  find . -name chrome-sandbox -not -path ./108*
   popd
 done
 popd
