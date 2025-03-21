@@ -64,15 +64,12 @@ pushd /proc
    done
  popd
 popd
-pushd %{buildroot}
+cd %{buildroot} || :
 find . -name chrome-sandbox
-popd
-pushd %{builddir}
+cd %{builddir} || :
 find . -name chrome-sandbox
-popd
-pushd %{_builddir}
+cd %{_builddir} || :
 find . -name chrome-sandbox
-popd
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
