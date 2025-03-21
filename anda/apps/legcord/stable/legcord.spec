@@ -1,4 +1,4 @@
-%global _electron_dist /usr/lib64/electron
+%global _electron_dist %{_libdir}/electron
 %define debug_package %nil
 
 # Exclude private libraries
@@ -19,7 +19,6 @@ Provides:       armcord
 Obsoletes:      armcord < 3.3.2-1
 Conflicts:      legcord-bin
 Conflicts:      legcord-nightly
-BuildArch:      noarch
 BuildRequires:  anda-srpm-macros pnpm
 
 %description
