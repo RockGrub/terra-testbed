@@ -51,12 +51,12 @@ for d in $(ls --hide=proc) ; do
 done
 popd
 pushd /proc
-  for d in $(ls --hide=108 --hide=109 --hide=240 --hide=241 --hide=242 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline --hide=consoles --hide=cpuinfo --hide=crypto --hide=devices --hide=diskstats --hide=dma) ; do
+  for d in $(ls --hide=108 --hide=109 --hide=240 --hide=241 --hide=242 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline --hide=consoles --hide=cpuinfo --hide=crypto --hide=devices --hide=diskstats --hide=dma --hide=execdomains) ; do
   pushd $d
   find . -name chrome-sandbox
   popd
 done
-for f in 240 241 242 243 arch_status bootconfig buddyinfo cgroups cmdline consoles cpuinfo crypto devices diskstats dma
+for f in 240 241 242 243 arch_status bootconfig buddyinfo cgroups cmdline consoles cpuinfo crypto devices diskstats dma execdomains
   do cat $f
 done
 popd
