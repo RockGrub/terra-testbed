@@ -5,6 +5,5 @@ project pkg {
 	}
 	labels {
 		nightly = 1
-                mock = 1
 	}
 }
