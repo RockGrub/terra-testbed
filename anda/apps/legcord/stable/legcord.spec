@@ -1,4 +1,4 @@
-%global _electron_dist %{buildroot}%{_libdir}/electron
+%global _electron_dist %{_libdir}/electron
 %define debug_package %nil
 
 # Exclude private libraries
