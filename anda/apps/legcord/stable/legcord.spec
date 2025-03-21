@@ -69,7 +69,6 @@ cd %{buildroot} || :
 find . -name chrome-sandbox
 cd %{builddir} || :
 find . -name chrome-sandbox
-cd %{_builddir} || :
 cd /github || cd /github/home || cd /github/home/rpmbuild
 find . -name chrome-sandbox
 export NODE_ENV=production
