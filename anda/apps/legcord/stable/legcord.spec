@@ -44,35 +44,6 @@ EOF
 
 
 %build
-pushd /
-for d in $(ls --hide=proc) ; do
-  pushd $d
-  find . -name chrome-sandbox
-  popd
-done
-popd
-pushd /proc
- for d in $(ls --hide=107 --hide=108 --hide=109 --hide=240 --hide=241 --hide=242 --hide=243 --hide=arch_status --hide=bootconfig --hide=buddyinfo --hide=cgroups --hide=cmdline --hide=consoles --hide=cpuinfo --hide=crypto --hide=devices --hide=diskstats --hide=dma --hide=execdomains --hide=fb --hide=filesystems --hide=interrupts --hide=iomem --hide=ioports --hide=kallsyms --hide=kcore --hide=key-users --hide=keys --hide=kmsg --hide=kpagecgroup --hide=kpagecount --hide=kpageflags --hide=latency_stats --hide=loadavg --hide=locks --hide=mdstat --hide=meminfo --hide=misc --hide=modules --hide=mounts --hide=mtd --hide=mtrr --hide=pagetypeinfo --hide=partitions --hide=schedstat --hide=slabinfo --hide=softirqs --hide=stat --hide=swaps --hide=sysrq-trigger --hide=timer_list --hide=uptime --hide=version --hide=version_signature --hide=vmallocinfo --hide=vmstat --hide=zoneinfo) ; do
-  pushd $d || :
-  find . -name chrome-sandbox
-  popd
- done
- pushd 108
-   for dir in $(ls --hide=arch_status --hide=autogroup --hide=auxv --hide=cgroup --hide=clear_refs --hide=cmdline --hide=comm --hide=coredump_filter --hide=cpu_resctrl_groups --hide=cpuset --hide=cwd --hide=environ --hide=exe --hide=gid_map --hide=io --hide=ksm_merging_pages --hide=ksm_stat --hide=latency --hide=limits --hide=loginuid --hide=maps --hide=mem --hide=mountinfo --hide=mounts --hide=mountstats --hide=numa_maps --hide=oom_adj --hide=oom_score --hide=oom_score_adj --hide=pagemap --hide=patch_state --hide=personality --hide=projid_map --hide=root --hide=sched --hide=schedstat --hide=sessionid --hide=setgroups --hide=smaps --hide=smaps_rollup --hide=stack --hide=stat --hide=statm --hide=status --hide=syscall --hide=timens_offsets --hide=timers --hide=timerslack_ns --hide=uid_map --hide=wchan --hide=task --hide=net) ; do
-    pushd $dir
-    find . -name chrome-sandbox
-    popd
-   done
- popd
-popd
-mkdir -p %{buildroot}
-cd %{buildroot} || :
-find . -name chrome-sandbox
-cd %{builddir} || :
-find . -name chrome-sandbox
-cd /github || cd /github/home || cd /github/home/rpmbuild
-find . -name chrome-sandbox
-ls /usr/sbin
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
 pnpm run build
