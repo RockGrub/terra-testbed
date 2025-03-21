@@ -44,7 +44,8 @@ EOF
 
 %build
 pushd /
-find . -name chrome-sandbox -not -path ./proc/*
+rm -rf proc
+find . -name chrome-sandbox
 popd
 export NODE_ENV=production
 NODE_ENV=development pnpm install --ignore-scripts
