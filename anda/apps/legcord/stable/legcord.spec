@@ -50,7 +50,7 @@ pnpm run build
 pnpm -c exec "electron-builder --linux dir --publish never -c.electronDist=%{_electron_dist} -c.electronVersion=$(cat %_electron_dist/version)"
 
 %install
-install -Dm644 dist/*-unpacked/resources/app.asar %buildroot/usr/share/legcord/app.asar
+install -Dm644 dist/*-unpacked/resources/app.asar %buildroot%_datadir/legcord/app.asar
 
 install -Dm755 %SOURCE1 %buildroot/usr/bin/legcord
 install -Dm644 legcord.desktop %buildroot/usr/share/applications/LegCord.desktop
