@@ -13,7 +13,8 @@ License:        AGPL-3.0-or-later
 URL:            https://gitlab.com/gabmus/envision/
 Source0:        %url/-/archive/%commit/envision-%commit.tar.gz
 BuildRequires:  anda-srpm-macros
-BuildRequires:  cargo-rpm-macros
+BuildRequires:  ninja-build
+BuildRequires:  meson
 BuildRequires:  pkgconfig(glib-2.0) >= 2.66
 BuildRequires:  pkgconfig(gio-2.0) >= 2.66
 BuildRequires:  pkgconfig(gtk4) >= 4.10.0
@@ -37,9 +38,11 @@ Conflicts:      envision
 %cargo_prep_online
 
 %build
+%meson
+%meson_build
 
 %install
-%cargo_install
+%meson_install
 %{cargo_license_online} > LICENSE.dependencies
 
 %files
