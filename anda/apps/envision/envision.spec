@@ -14,6 +14,7 @@ URL:            https://gitlab.com/gabmus/envision/
 Source0:        %url/-/archive/%commit/envision-%commit.tar.gz
 BuildRequires:  anda-srpm-macros
 BuildRequires:  cargo
+BuildRequires:  cargo-rpm-macros
 BuildRequires:  ninja-build
 BuildRequires:  meson
 BuildRequires:  pkgconfig(glib-2.0) >= 2.66
