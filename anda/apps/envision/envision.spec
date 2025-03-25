@@ -1,9 +1,6 @@
 %global commit e117986715e1e9ef955009ad7f03ec110aa14940
 %global commit_date 20250303
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%if 0%{?rhel}
-%global debug_package %{nil}
-%endif
 
 Name:           envision-nightly
 Version:        %commit_date.%shortcommit
@@ -24,7 +21,7 @@ BuildRequires:  pkgconfig(gtk4) >= 4.10.0
 BuildRequires:  pkgconfig(vte-2.91-gtk4) >= 0.72.0
 BuildRequires:  pkgconfig(libadwaita-1)
 BuildRequires:  pkgconfig(libusb-1.0)
-BuildRequires:  openssl-devel-engine
+BuildRequires:  pkgconfig(openssl)
 BuildRequires:  openxr-devel
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
@@ -41,12 +38,19 @@ Conflicts:      envision
 %cargo_prep_online
 
 %build
+# generate constants.rs from constants.rs.in
 %meson
+
+# skip subdir
+sed -E "/^subdir\('src'\)/d" -i meson.build
+
+%meson --reconfigure
 %meson_build
 
 %install
 %meson_install
 %{cargo_license_online} > LICENSE.dependencies
+%cargo_install
 
 %files
 %doc README.md
