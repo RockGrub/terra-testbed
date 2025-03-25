@@ -12,7 +12,8 @@ Summary:        UI for building, configuring and running Monado, the open source
 License:        AGPL-3.0-or-later
 URL:            https://gitlab.com/gabmus/envision/
 Source0:        %url/-/archive/%commit/envision-%commit.tar.gz
-BuildRequires:  meson ninja-build cargo 
+BuildRequires:  anda-srpm-macros
+BuildRequires:  cargo-rpm-macros
 BuildRequires:  pkgconfig(glib-2.0) >= 2.66
 BuildRequires:  pkgconfig(gio-2.0) >= 2.66
 BuildRequires:  pkgconfig(gtk4) >= 4.10.0
@@ -33,17 +34,19 @@ Conflicts:      envision
 
 %prep
 %autosetup -n envision-%commit
+%cargo_prep_online
 
 %build
-%meson
-%meson_build
+%cargo_build
+%{cargo_license_online} > LICENSE.dependencies
 
 %install
-%meson_install
+%cargo_install
 
 %files
 %doc README.md
 %license LICENSE
+%license LICENSE.dependencies
 %_bindir/envision
 %_datadir/applications/org.gabmus.envision.Devel.desktop
 %_datadir/envision/
