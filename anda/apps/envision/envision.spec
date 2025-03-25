@@ -9,7 +9,8 @@ Name:           envision-nightly
 Version:        %commit_date.%shortcommit
 Release:        2%?dist
 Summary:        UI for building, configuring and running Monado, the open source OpenXR runtime
-License:        AGPL-3.0-or-later
+SourceLicense:  AGPL-3.0-or-later
+License:        ((Apache-2.0 OR MIT) AND BSD-3-Clause) AND ((MIT OR Apache-2.0) AND Unicode-3.0) AND (0BSD OR MIT OR Apache-2.0) AND AGPL-3.0-or-later AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR ISC OR MIT) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND Apache-2.0 AND (BSD-2-Clause OR Apache-2.0 OR MIT) AND ISC AND (MIT OR Apache-2.0) AND (MIT OR Zlib OR Apache-2.0) AND MIT AND Unicode-3.0 AND (Unlicense OR MIT) AND Zlib
 URL:            https://gitlab.com/gabmus/envision/
 Source0:        %url/-/archive/%commit/envision-%commit.tar.gz
 BuildRequires:  anda-srpm-macros
