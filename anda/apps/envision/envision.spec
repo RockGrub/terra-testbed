@@ -16,8 +16,8 @@ Source0:        %url/-/archive/%commit/envision-%commit.tar.gz
 BuildRequires:  anda-srpm-macros
 BuildRequires:  cargo
 BuildRequires:  cargo-rpm-macros
-BuildRequires:  ninja-build
 BuildRequires:  meson
+BuildRequires:  ninja-build
 BuildRequires:  pkgconfig(glib-2.0) >= 2.66
 BuildRequires:  pkgconfig(gio-2.0) >= 2.66
 BuildRequires:  pkgconfig(gtk4) >= 4.10.0
