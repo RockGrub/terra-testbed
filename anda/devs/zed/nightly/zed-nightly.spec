@@ -7,8 +7,6 @@
 
 # Exclude input files from mangling
 %global __brp_mangle_shebangs_exclude_from ^/usr/src/.*$
-# Use Mold as the linker
-%global build_rustflags %build_rustflags -C link-arg=-fuse-ld=mold
 
 %global crate zed
 %global app_id dev.zed.Zed-Nightly
@@ -17,18 +15,19 @@ Name:           zed-nightly
 Version:        %ver^%commit_date.%shortcommit
 Release:        1%?dist
 Summary:        Zed is a high-performance, multiplayer code editor
-
-License:        MIT
+SourceLicense:  AGPL-3.0-only AND Apache-2.0 AND GPL-3.0-or-later
+License:
 URL:            https://zed.dev/
-Source0:        https://github.com/zed-industries/zed/archive/%{commit}.zip
+Source0:        https://github.com/zed-industries/zed/archive/%{commit}.tar.gz
 
 Conflicts:      zed
-Provides:       zed
+Conflicts:      zed-preview
 
 BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:  anda-srpm-macros
 BuildRequires:  gcc
-BuildRequires:  g++
+BuildRequires:  gcc-c++
+BuildRequires:  gettext-envsubst
 BuildRequires:  clang
 BuildRequires:  mold
 BuildRequires:  cmake
@@ -87,18 +86,26 @@ install -Dm644 crates/zed/resources/app-icon-nightly.png %{buildroot}%{_datadir}
 
 install -Dm644 %app_id.metainfo.xml %{buildroot}%{_metainfodir}/%app_id.metainfo.xml
 
+# The license generation script doesn't generate licenses for ALL compiled dependencies, just direct deps of Zed, and it does not "group" licenses
+%{cargo_license_online} > LICENSE.dependencies
+
 %if %{with check}
 %check
 %cargo_test
 %endif
 
 %files
+%doc README.md
+%license LICENSE-AGPL
+%license LICENSE-APACHE
+%license LICENSE-GPL
+%license LICENSE.dependencies
+%license assets/licenses.md
 %{_libexecdir}/zed-editor
 %{_bindir}/zed
 %{_datadir}/applications/%app_id.desktop
 %{_datadir}/pixmaps/%app_id.png
 %{_metainfodir}/%app_id.metainfo.xml
-%license assets/licenses.md
 
 %changelog
 %autochangelog
