@@ -12,7 +12,7 @@ Version:        %(echo %ver | sed 's/-/~/')
 Release:        pre1%?dist
 Summary:        Zed is a high-performance, multiplayer code editor
 SourceLicense:  AGPL-3.0-only AND Apache-2.0 AND GPL-3.0-or-later
-License:
+License:        Placeholder
 URL:            https://zed.dev/
 Source0:        https://github.com/zed-industries/zed/archive/refs/tags/v%{ver}.tar.gz
 
