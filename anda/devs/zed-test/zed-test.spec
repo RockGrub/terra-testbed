@@ -35,26 +35,7 @@ Generate licenses
 %autosetup -n %{crate}-%{commit} -p1
 %cargo_prep_online
 
-export DO_STARTUP_NOTIFY="true"
-export APP_ID="%app_id"
-export APP_ICON="%app_id"
-export APP_NAME="Zed Nightly"
-export APP_CLI="zed"
-export APP="%{_libexecdir}/zed-editor"
-export APP_ARGS="%U"
-export ZED_UPDATE_EXPLANATION="Run dnf up to update Zed Nightly from Terra."
-export ZED_RELEASE_CHANNEL=nightly
-export BRANDING_LIGHT="#e9aa6a"
-export BRANDING_DARK="#1a5fb4"
-
-echo "StartupWMClass=$APP_ID" >> crates/zed/resources/zed.desktop.in
-envsubst < "crates/zed/resources/zed.desktop.in" > $APP_ID.desktop # from https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=zed-git#n52
-
-envsubst < "crates/zed/resources/flatpak/zed.metainfo.xml.in" > $APP_ID.metainfo.xml
-
 %build
-export ZED_UPDATE_EXPLANATION="Run dnf up to update Zed Nightly from Terra."
-echo "nightly" > crates/zed/RELEASE_CHANNEL
 
 %install
 %cargo_license_summary_online
