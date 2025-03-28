@@ -41,12 +41,13 @@ Generate licenses
 
 %install
 export CARGOFLAGS="-vv --verbose"
-cargo tree                                                 \
+%{__cargo} tree                                                 \
     -Z avoid-dev-deps                                               \
     --workspace                                                     \
     --edges no-build,no-dev,no-proc-macro                           \
     --no-dedupe                                                     \
     --target all                                                    \
+    %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}}                \
     --prefix none                                                   \
     --format "{l}: {p}"                                             
   
