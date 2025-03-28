@@ -41,7 +41,15 @@ Generate licenses
 
 %install
 export CARGOFLAGS="-vv --verbose"
-%cargo_license_summary_online
+cargo tree                                                 \
+    -Z avoid-dev-deps                                               \
+    --workspace                                                     \
+    --edges no-build,no-dev,no-proc-macro                           \
+    --no-dedupe                                                     \
+    --target all                                                    \
+    --prefix none                                                   \
+    --format "{l}: {p}"                                             
+  
 
 %files
 %license LICENSE.dependencies
