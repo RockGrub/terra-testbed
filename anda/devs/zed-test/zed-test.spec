@@ -1,5 +1,6 @@
 %global commit 931a6d6f407b294004d091fea780d3a061cfe091
 %global crate zed
+%global debug_package %{nil}
 
 Name: zed-test
 Version: 0.1.0
