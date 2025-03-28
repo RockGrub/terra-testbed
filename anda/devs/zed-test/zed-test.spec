@@ -12,6 +12,7 @@ BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:  anda-srpm-macros
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  git
 BuildRequires:  clang
 BuildRequires:  mold
 BuildRequires:  cmake
