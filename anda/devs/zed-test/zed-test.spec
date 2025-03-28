@@ -26,6 +26,7 @@ BuildRequires:  perl-IPC-Cmd
 BuildRequires:  perl-File-Compare
 BuildRequires:  perl-File-Copy
 BuildRequires:  perl-lib
+BuildRequires:  rust2rpm
 BuildRequires:  vulkan-loader
 
 %description
@@ -38,6 +39,7 @@ Generate licenses
 %build
 
 %install
+rust2rpm --patch --no-patch-foreign
 export CARGOFLAGS="-vv --verbose"
 %{cargo_license_online} > LICENSE.dependencies
 
