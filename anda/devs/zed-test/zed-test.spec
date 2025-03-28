@@ -41,8 +41,9 @@ Generate licenses
 %build
 
 %install
-export CARGOFLAGS="-vv --verbose"
-    %{__cargo} tree                                                 \
+# The license generation script doesn't generate licenses for ALL compiled dependencies, just direct deps of Zed, and it does not "group" licenses
+# There is also some horrible issue with --no-dedupes with Zed so we have to work around this
+%{__cargo} tree                                                 \
     -Z avoid-dev-deps                                               \
     --workspace                                                     \
     --edges no-build,no-dev,no-proc-macro                           \
@@ -53,10 +54,29 @@ export CARGOFLAGS="-vv --verbose"
     | sed -e "s: ($(pwd)[^)]*)::g" -e "s: / :/:g" -e "s:/: OR :g"   \
     | sort -u                                                       \
 > LICENSE.dependencies
-  
+# Remove duplicate entries
+sed -i 's/.*(\*).*//g' LICENSE.dependencies
+# Remove GitHub links
+sed -i 's/(https.*//g' LICENSE.dependencies
+# Add license to Microsoft crates hosted on GitHub
+sed -i '/^: pet/ s/./MIT&/' LICENSE.dependencies
+# Remove empty lines
+sed -ir '/^\s*$/d' LICENSE.dependencies
+mv assets/icons/LICENSES LICENSE.icons
+mv assets/themes/LICENSES LICENSE.themes
+mv assets/fonts/plex-mono/license.txt LICENSE.fonts
 
 %files
+%doc CODE_OF_CONDUCT.md
+%doc README.md
+%license LICENSE-AGPL
+%license LICENSE-APACHE
+%license LICENSE-GPL
 %license LICENSE.dependencies
+%license LICENSE.icons
+%license LICENSE.fonts
+%license LICENSE.themes
+%license assets/licenses.md
 
 %changelog
 * Wed Mar 26 2025 John Doe <packager@example.com>
