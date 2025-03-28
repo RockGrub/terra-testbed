@@ -39,7 +39,7 @@ Generate licenses
 %build
 
 %install
-rust2rpm --patch --no-patch-foreign --path . pkgid crates/zed
+rust2rpm --patch --no-patch-foreign --path . pkgid=crates/zed --no-rpmautospec
 export CARGOFLAGS="-vv --verbose"
 %{cargo_license_online} > LICENSE.dependencies
 
