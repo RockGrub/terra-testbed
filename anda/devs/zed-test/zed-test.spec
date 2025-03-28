@@ -43,7 +43,7 @@ Generate licenses
 RUST2RPM_NO_DETECT_PACKAGER=1 rust2rpm --patch --no-patch-foreign --no-existence-check --no-rpmautospec --path . zed
 rm zed.spec
 export CARGOFLAGS="-vv --verbose"
-%{cargo_license_online} > LICENSE.dependencies
+%{cargo_license} > LICENSE.dependencies
 
 %files
 %license LICENSE.dependencies
