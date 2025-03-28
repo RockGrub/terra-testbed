@@ -41,7 +41,7 @@ Generate licenses
 
 %install
 export CARGOFLAGS="-vv --verbose"
-%{cargo_license} > LICENSE.dependencies
+%cargo_license_summary_online
 
 %files
 %license LICENSE.dependencies
