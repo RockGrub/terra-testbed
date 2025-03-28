@@ -45,7 +45,7 @@ export CARGOFLAGS="-vv --verbose"
     -Z avoid-dev-deps                                               \
     --workspace                                                     \
     --edges no-build,no-dev,no-proc-macro                           \
-    --target rpm                                                    \
+    --target all                                                    \
     %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}}                \
     --prefix none                                                   \
     --format "{l}: {p}"                                             \
