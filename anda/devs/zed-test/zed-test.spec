@@ -40,7 +40,8 @@ Generate licenses
 %build
 
 %install
-RUST2RPM_NO_DETECT_PACKAGER=1 rust2rpm --patch --no-patch-foreign --path . --no-rpmautospec zed
+RUST2RPM_NO_DETECT_PACKAGER=1 rust2rpm --patch --path . zed
+rm zed.spec
 export CARGOFLAGS="-vv --verbose"
 %{cargo_license_online} > LICENSE.dependencies
 
