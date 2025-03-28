@@ -39,6 +39,7 @@ Generate licenses
 %cargo_prep_online
 
 %build
+script/generate-licenses
 
 %install
 # The license generation script doesn't generate licenses for ALL compiled dependencies, just direct deps of Zed, and it does not "group" licenses
