@@ -38,7 +38,7 @@ Generate licenses
 %build
 
 %install
-%cargo_license_summary_online
+export RUSTFLAGS=$RUSTFLAGS -vv
 %{cargo_license_online} > LICENSE.dependencies
 
 %files
