@@ -41,15 +41,18 @@ Generate licenses
 
 %install
 export CARGOFLAGS="-vv --verbose"
-%{__cargo} tree                                                 \
+    %{__cargo} tree                                                 \
     -Z avoid-dev-deps                                               \
     --workspace                                                     \
     --edges no-build,no-dev,no-proc-macro                           \
     --no-dedupe                                                     \
-    --target all                                                    \
+    --target rpm                                                    \
     %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}}                \
     --prefix none                                                   \
-    --format "{l}: {p}"                                             
+    --format "{l}: {p}"                                             \
+    | sed -e "s: ($(pwd)[^)]*)::g" -e "s: / :/:g" -e "s:/: OR :g"   \
+    | sort -u                                                       \
+> LICENSE.dependencies
   
 
 %files
