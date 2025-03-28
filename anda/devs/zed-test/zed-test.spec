@@ -39,7 +39,7 @@ Generate licenses
 %build
 
 %install
-rust2rpm --patch --no-patch-foreign --path .
+rust2rpm --patch --no-patch-foreign --path ./Cargo.toml
 export CARGOFLAGS="-vv --verbose"
 %{cargo_license_online} > LICENSE.dependencies
 
