@@ -34,13 +34,14 @@ Generate licenses
 
 %prep
 %autosetup -n %{crate}-%{commit} -p1
-export CARGOFLAGS="-vv --verbose"
-%{cargo_license_online} > LICENSE.dependencies
 %cargo_prep_online
 
 %build
 
 %install
+rust2rpm --patch --no-patch-foreign --path . pkgid=zed --no-rpmautospec
+export CARGOFLAGS="-vv --verbose"
+%{cargo_license_online} > LICENSE.dependencies
 
 %files
 %license LICENSE.dependencies
