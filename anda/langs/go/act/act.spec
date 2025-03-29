@@ -40,7 +40,6 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %build
 
 %install
-cd %{_builddir}
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
