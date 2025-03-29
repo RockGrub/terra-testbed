@@ -40,6 +40,7 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %autosetup -p1 -n %{name}-%{version}
 
 %build
+%{__make} test
 %make_build PREFIX=%{buildroot}%{_prefix}
 
 %install
