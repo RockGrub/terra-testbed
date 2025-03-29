@@ -34,7 +34,7 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %gopkg
 
 %prep
-%git_clone https://github.com/nektos/act v%{version}
+git clone https://github.com/nektos/act -b v%{version}
 %go_prep_online
 
 %build
