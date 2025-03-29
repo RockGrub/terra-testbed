@@ -43,7 +43,7 @@ git switch -c v%{version}
 
 %install
 %define gomodulesmode GO111MODULE=on
-%{__make} installer
+./install.sh
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
