@@ -35,10 +35,13 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 
 %prep
 %git_clone https://github.com/nektos/act v%{version}
+echo $PWD
 %go_prep_online
 %goprep -A
 
 %build
+echo %{_builddir}
+echo %{builddir}
 
 %install
 cd /github/home/rpmbuild/BUILD/act-0.2.75-build/act-0.2.75/_build
