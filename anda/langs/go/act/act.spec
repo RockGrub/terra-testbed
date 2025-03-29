@@ -2,14 +2,6 @@
 %bcond check 1
 %bcond bootstrap 0
 
-%if %{with bootstrap}
-%global debug_package %{nil}
-%endif
-
-%if %{with bootstrap}
-%global __requires_exclude %{?__requires_exclude:%{__requires_exclude}|}^golang\\(.*\\)$
-%endif
-
 # https://github.com/nektos/act
 %global goipath         github.com/nektos/act
 Version:                0.2.75
@@ -47,29 +39,22 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %go_prep_online
 %autosetup -p1 -n %{name}-%{version}
 
-%if %{without bootstrap}
 %build
 %make_build PREFIX=%{buildroot}%{_prefix}
 
 %install
-%if %{without bootstrap}
 install -m 0755 -vd                     %{buildroot}%{_bindir}
 install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
-%endif
 
-%if %{without bootstrap}
 %if %{with check}
 %check
 %gocheck
 %endif
-%endif
 
-%if %{without bootstrap}
 %files
 %license LICENSE pkg/lookpath/LICENSE
 %doc .markdownlint.yml CONTRIBUTING.md IMAGES.md README.md
 %{_bindir}/act
-%endif
 
 %changelog
 %autochangelog
