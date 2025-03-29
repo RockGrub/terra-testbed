@@ -1,6 +1,21 @@
 %global commit 931a6d6f407b294004d091fea780d3a061cfe091
 %global crate zed
 %global debug_package %{nil}
+%global global zed_license %{shrink:                                \
+    %{__cargo} tree                                                 \
+    -Z avoid-dev-deps                                               \
+    --workspace                                                     \
+    --edges no-build,no-dev,no-proc-macro                           \
+    --target all                                                    \
+    %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}}                \
+    --prefix none                                                   \
+    --format "{l}: {p}"                                             \
+    | sed -e "s: ($(pwd)[^)]*)::g" -e "s: / :/:g" -e "s:/: OR :g"   \
+    | sed '/.*(\*).*/d'                                             \
+    | sed 's/(https.*//g'                                           \
+    | sed '/^: pet/ s/./MIT&/'                                      \
+    | sort -u                                                       \
+}\
 
 Name: zed-test
 Version: 0.1.0
@@ -44,20 +59,7 @@ script/generate-licenses
 %install
 # The license generation script doesn't generate licenses for ALL compiled dependencies, just direct deps of Zed, and it does not "group" licenses
 # There is also some horrible issue with --no-dedupes with Zed so we have to work around this
-%{__cargo} tree                                                 \
-    -Z avoid-dev-deps                                               \
-    --workspace                                                     \
-    --edges no-build,no-dev,no-proc-macro                           \
-    --target all                                                    \
-    %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}}                \
-    --prefix none                                                   \
-    --format "{l}: {p}"                                             \
-    | sed -e "s: ($(pwd)[^)]*)::g" -e "s: / :/:g" -e "s:/: OR :g"   \
-    | sed '/.*(\*).*/d'                                             \
-    | sed 's/(https.*//g'                                           \
-    | sed '/^: pet/ s/./MIT&/'                                      \
-    | sort -u                                                       \
-> LICENSE.dependencies
+%{zed_license} > LICENSE.dependencies
 mv assets/icons/LICENSES LICENSE.icons
 mv assets/themes/LICENSES LICENSE.themes
 mv assets/fonts/plex-mono/license.txt LICENSE.fonts
