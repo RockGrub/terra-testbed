@@ -34,6 +34,8 @@ BuildRequires:  anda-srpm-macros
 BuildRequires:  bash
 BuildRequires:  golang
 BuildRequires:  go-rpm-macros
+BuildRequires:  make
+BuildRequires:  nodejs-npm
 Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 
 %description %{common_description}
@@ -47,12 +49,7 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 
 %if %{without bootstrap}
 %build
-%define gomodulesmode GO111MODULE=on
-for cmd in cmd/* ; do
-  go build -o %{gobuilddir}/bin/$(basename $cmd) %{goipath}/$cmd
-done
-go build -o %{gobuilddir}/bin/act %{goipath}
-%endif
+%make_build PREFIX=%{buildroot}%{_prefix}
 
 %install
 %if %{without bootstrap}
