@@ -56,7 +56,7 @@ script/generate-licenses
     | sort -u                                                       \
 > LICENSE.dependencies
 # Remove duplicate entries
-sed -i 's/.*(\*).*//d' LICENSE.dependencies
+sed -i '/.*(\*).*/d' LICENSE.dependencies
 # Remove GitHub links
 sed -i 's/(https.*//g' LICENSE.dependencies
 # Add license to Microsoft crates hosted on GitHub
