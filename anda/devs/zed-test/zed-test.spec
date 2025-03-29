@@ -53,16 +53,11 @@ script/generate-licenses
     --prefix none                                                   \
     --format "{l}: {p}"                                             \
     | sed -e "s: ($(pwd)[^)]*)::g" -e "s: / :/:g" -e "s:/: OR :g"   \
+    | sed '/.*(\*).*/d'                                             \
+    | sed 's/(https.*//g'                                           \
+    | sed '/^: pet/ s/./MIT&/'                                      \
     | sort -u                                                       \
 > LICENSE.dependencies
-# Remove duplicate entries
-sed -i '/.*(\*).*/d' LICENSE.dependencies
-# Remove GitHub links
-sed -i 's/(https.*//g' LICENSE.dependencies
-# Add license to Microsoft crates hosted on GitHub
-sed -i '/^: pet/ s/./MIT&/' LICENSE.dependencies
-# Remove empty lines
-#sed -ir '/^\s*$/d' LICENSE.dependencies
 mv assets/icons/LICENSES LICENSE.icons
 mv assets/themes/LICENSES LICENSE.themes
 mv assets/fonts/plex-mono/license.txt LICENSE.fonts
