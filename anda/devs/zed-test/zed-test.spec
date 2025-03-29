@@ -1,7 +1,7 @@
 %global commit 931a6d6f407b294004d091fea780d3a061cfe091
 %global crate zed
 %global debug_package %{nil}
-%global global zed_license %{shrink:                                \
+%global zed_license %{shrink:                                       \
     %{__cargo} tree                                                 \
     -Z avoid-dev-deps                                               \
     --workspace                                                     \
