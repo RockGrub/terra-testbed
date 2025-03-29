@@ -36,10 +36,12 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %prep
 %git_clone https://github.com/nektos/act v%{version}
 %goprep -A
+%go_prep_online
 
 %build
 
 %install
+cd /github/home/rpmbuild/BUILD/act-0.2.75-build/act-0.2.75/_build
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
