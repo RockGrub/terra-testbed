@@ -49,9 +49,9 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %build
 %define gomodulesmode GO111MODULE=on
 for cmd in cmd/* ; do
-  %gobuild -o %{gobuilddir}/bin/$(basename $cmd) %{goipath}/$cmd
+  go build -o %{gobuilddir}/bin/$(basename $cmd) %{goipath}/$cmd
 done
-%gobuild -o %{gobuilddir}/bin/act %{goipath}
+go build -o %{gobuilddir}/bin/act %{goipath}
 %endif
 
 %install
