@@ -21,7 +21,6 @@ Summary:        None
 
 License:        MIT AND ISC AND BSD-3-Clause AND Apache-2.0 AND BSD-2-Clause
 URL:            %{gourl}
-Source:         %{gosource}
 BuildRequires:  anda-srpm-macros
 BuildRequires:  bash
 BuildRequires:  golang
@@ -35,17 +34,14 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %gopkg
 
 %prep
-%goprep -A
+%git_clone https://github.com/nektos/act v%{version}
 %go_prep_online
-%autosetup -p1 -n %{name}-%{version}
 
 %build
-%{__make} test
-%make_build PREFIX=%{buildroot}%{_prefix}
 
 %install
-install -m 0755 -vd                     %{buildroot}%{_bindir}
-install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
+%{__make} test
+%make_install PREFIX=%{buildroot}%{_prefix}
 
 %if %{with check}
 %check
