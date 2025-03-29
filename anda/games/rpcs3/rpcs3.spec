@@ -20,13 +20,12 @@ BuildRequires:  pkgconfig(libzstd)
 BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  pkgconfig(libevdev)
 BuildRequires:  pkgconfig(libudev)
-BuildRequires:  %_libdir/libOpenGL.so
-BuildRequires:  %_libdir/libvulkan.so
-BuildRequires:  %_libdir/libffi.so
-BuildRequires:  %_libdir/libcurl.so
-BuildRequires:  %_libdir/libasound.so
-BuildRequires:  %_libdir/libxkbcommon.so
-BuildRequires:  pkgconfig(jack)
+BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(vulkan)
+BuildRequires:  pkgconfig(libffi)
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(alsa)
+BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
 
