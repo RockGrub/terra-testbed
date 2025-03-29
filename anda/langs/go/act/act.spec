@@ -40,10 +40,9 @@ git switch -c v%{version}
 %go_prep_online
 
 %build
+%make_build
 
 %install
-%define gomodulesmode GO111MODULE=on
-./install.sh -b .
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
