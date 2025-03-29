@@ -41,7 +41,9 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 
 %install
 mkdir -p %{buildroot}%{_bindir}
+pushd cmd
 %make_install PREFIX=%{buildroot}%{_prefix}
+popd
 
 %if %{with check}
 %check
