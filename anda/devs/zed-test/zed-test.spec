@@ -4,7 +4,7 @@
 
 Name: zed-test
 Version: 0.1.0
-Release: 1%?dist
+Release: 2%?dist
 Summary: Zed license generator
 License: MIT
 URL:            https://zed.dev/
@@ -56,13 +56,13 @@ script/generate-licenses
     | sort -u                                                       \
 > LICENSE.dependencies
 # Remove duplicate entries
-sed -i 's/.*(\*).*//g' LICENSE.dependencies
+sed -i 's/.*(\*).*//d' LICENSE.dependencies
 # Remove GitHub links
 sed -i 's/(https.*//g' LICENSE.dependencies
 # Add license to Microsoft crates hosted on GitHub
 sed -i '/^: pet/ s/./MIT&/' LICENSE.dependencies
 # Remove empty lines
-sed -ir '/^\s*$/d' LICENSE.dependencies
+#sed -ir '/^\s*$/d' LICENSE.dependencies
 mv assets/icons/LICENSES LICENSE.icons
 mv assets/themes/LICENSES LICENSE.themes
 mv assets/fonts/plex-mono/license.txt LICENSE.fonts
