@@ -34,14 +34,16 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %gopkg
 
 %prep
-%git_clone https://github.com/nektos/act v%{version}
+git clone https://github.com/nektos/act.git
+%setup -T -D -n %{name}
+git switch -c v%{version}
 %go_prep_online
-%goprep -A
 
 %build
 
 %install
 cd %{_builddir}/%{name}
+%{__make} tests
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
