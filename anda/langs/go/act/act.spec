@@ -43,6 +43,7 @@ echo $PWD
 %build
 
 %install
+cd %{builddir}/%{name}
 %{__make} tests
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
