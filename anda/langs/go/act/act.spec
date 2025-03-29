@@ -35,15 +35,21 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 
 %prep
 git clone https://github.com/nektos/act.git
+echo $PWD
+ls
 %setup -T -D -n %{name}
 git switch -c v%{version}
 echo $PWD
+ls
 %go_prep_online
+echo $PWD
+ls
 
 %build
 
 %install
-cd %{builddir}/%{name}
+echo $PWD
+ls
 %{__make} tests
 mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
