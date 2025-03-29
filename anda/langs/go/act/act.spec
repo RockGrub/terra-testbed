@@ -42,6 +42,7 @@ git switch -c v%{version}
 %build
 
 %install
+mkdir -p %{buildroot}%{_bindir}
 %make_install PREFIX=%{buildroot}%{_prefix}
 
 %if %{with check}
