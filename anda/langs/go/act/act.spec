@@ -41,7 +41,6 @@ Packager:       xiaoshihou <xiaoshihou@tutamail.com>
 %build
 
 %install
-%{__make} test
 %make_install PREFIX=%{buildroot}%{_prefix}
 
 %if %{with check}
