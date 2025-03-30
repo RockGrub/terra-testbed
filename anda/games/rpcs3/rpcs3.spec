@@ -36,6 +36,7 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 %git_clone %url v%version
 
 %build
+CLFAGS="$CFLAGS -Wno-maybe-uninitialized"
 %ifarch aarch64
 EXTRA=-DUSE_NATIVE_INSTRUCTIONS=OFF
 %else
