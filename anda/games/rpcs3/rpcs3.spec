@@ -35,7 +35,9 @@ BuildRequires:  pkgconfig(libavformat)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(libswresample)
-
+BuildRequires:  pkgconfig(wayland-server)
+BuildRequires:  pkgconfig(wayland-cursor)
+#BuildRequires:  pkgconfig(wayland-eglstream)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
 
