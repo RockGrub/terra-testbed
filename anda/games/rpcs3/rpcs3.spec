@@ -61,8 +61,8 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
     -DUSE_SYSTEM_FFMPEG=ON                             \
     -DUSE_SYSTEM_OPENCV=ON                             \
     -DUSE_DISCORD_RPC=ON                               \
-    -DOpenGL_GL_PREFERENCE=LEGACY                      \
     -DSTATIC_LINK_LLVM=OFF
+#    -DOpenGL_GL_PREFERENCE=LEGACY                      \
 %cmake_build
 
 %install
