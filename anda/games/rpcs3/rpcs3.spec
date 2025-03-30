@@ -55,13 +55,13 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"                      \
     -DCMAKE_AR="$AR"                                   \
     -DCMAKE_RANLIB="$RANLIB"                           \
-    -DUSE_SYSTEM_CURL=ON                               \
-    -DUSE_SYSTEM_FFMPEG=ON                             \
-    -DUSE_SYSTEM_OPENCV=ON                             \
-    -DUSE_DISCORD_RPC=ON                               \
+    -DUSE_SYSTEM_SDL=ON                                \
+    -DUSE_SDL=ON                                       \
     -DSTATIC_LINK_LLVM=OFF
-#    -DUSE_SYSTEM_SDL=ON                                \
-#    -DUSE_SDL=ON                                       \
+#    -DUSE_SYSTEM_CURL=ON                               \
+#    -DUSE_SYSTEM_FFMPEG=ON                             \
+#    -DUSE_SYSTEM_OPENCV=ON                             \
+#    -DUSE_DISCORD_RPC=ON                               \
 #    -DOpenGL_GL_PREFERENCE=LEGACY                      \
 %cmake_build
 
