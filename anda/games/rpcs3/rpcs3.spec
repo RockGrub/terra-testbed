@@ -1,4 +1,4 @@
-%global _distro_extra_cflags -Wno-maybe-uninitialized
+%global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 
 Name:           rpcs3
@@ -8,7 +8,7 @@ Summary:        PlayStation 3 emulator and debugger
 License:        GPL-2.0-only
 URL:            https://github.com/RPCS3/rpcs3
 %dnl Source0:        %url/archive/refs/tags/v%version.tar.gz
-BuildRequires:  glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ git-core
+BuildRequires:  glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ git-core mold
 BuildRequires:  cmake(FAudio)
 BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
@@ -39,12 +39,21 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 %git_clone %url v%version
 
 %build
-%ifarch aarch64
-EXTRA=-DUSE_NATIVE_INSTRUCTIONS=OFF
-%else
-EXTRA=
-%endif
-%cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF $EXTRA
+%cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF\
+    -DUSE_NATIVE_INSTRUCTIONS=OFF                      \
+    -DUSE_PRECOMPILED_HEADERS=OFF                      \
+    -DCMAKE_C_FLAGS="$CFLAGS"                          \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS"                      \
+    -DCMAKE_AR="$AR"                                   \
+    -DCMAKE_RANLIB="$RANLIB"                           \
+    -DUSE_SYSTEM_CURL=ON                               \
+    -DUSE_SDL=ON                                       \
+    -DUSE_SYSTEM_SDL=ON                                \
+    -DUSE_SYSTEM_FFMPEG=ON                             \
+    -DUSE_SYSTEM_OPENCV=ON                             \
+    -DUSE_DISCORD_RPC=ON                               \
+    -DOpenGL_GL_PREFERENCE=LEGACY                      \
+    -DSTATIC_LINK_LLVM=OFF
 %cmake_build
 
 %install
