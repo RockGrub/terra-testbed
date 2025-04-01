@@ -52,7 +52,7 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
-Patch0:         stupidest-workaround.patch
+#Patch0:         stupidest-workaround.patch
 # Remove native lib directories from rpath
 # this is unlikely to be upstreamed in its current state because upstream
 # wants to work around the shortcomings of NixOS
