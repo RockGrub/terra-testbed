@@ -12,7 +12,7 @@
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
-%bcond gcc14     1
+%bcond gcc14     0
 %if 0%{?fedora} <= 40
 %global zig_cache_dir %{_builddir}/zig-cache
 %else
@@ -37,7 +37,6 @@
     -Dstd-docs=false \
     -Dpie \
     -Dconfig_h="%{__cmake_builddir}/config.h" \
-    -Dbuild-id="sha1" \
 }
 %global zig_install_options %zig_build_options %{shrink: \
     --prefix "%{_prefix}" \
