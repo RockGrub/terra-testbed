@@ -153,9 +153,9 @@ export CXX=g++-14
     -DZIG_VERSION:STRING="%{ver}"
 
 %if %{with bootstrap}
-%make_build target stage3
+%make_build stage3
 %else
-%make_build target zigcpp
+%make_build zigcpp
 zig build %{zig_build_options}
 
 # Zig has no official manpage
