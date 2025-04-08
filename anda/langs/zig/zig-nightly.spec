@@ -30,13 +30,13 @@
     --cache-dir "%{zig_cache_dir}" \
     --global-cache-dir "%{zig_cache_dir}" \
     \
-#    -Dversion-string="%{version}" \
+    -Dversion-string="%{ver}" \
     -Dstatic-llvm=false \
     -Denable-llvm=true \
     -Dno-langref=true \
     -Dstd-docs=false \
     -Dpie \
-    -Dconfig_h="%{__cmake_builddir}/config.h" \
+#    -Dconfig_h="%{__cmake_builddir}/config.h" \
     -Dbuild-id="sha1" \
 }
 %global zig_install_options %zig_build_options %{shrink: \
