@@ -12,6 +12,7 @@
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
+%bcond gcc14     0
 %if 0%{?fedora} <= 40
 %global zig_cache_dir %{_builddir}/zig-cache
 %else
@@ -62,6 +63,10 @@ Patch0:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14
 Patch1:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+%if %{with gcc14}
+BuildRequires: gcc14
+BuildRequires: gcc14-c++
+%endif
 BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
@@ -124,6 +129,10 @@ Documentation for Zig. For more information, visit %{url}
 %autosetup -p1 -n zig-%{ver}
 
 %build
+%if %{with gcc14}
+export CC=gcc-14
+export CXX=g++-14
+%endif
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
 
