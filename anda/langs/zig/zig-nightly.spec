@@ -12,7 +12,7 @@
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
-%bcond gcc14     0
+%bcond gcc14     1
 %if 0%{?fedora} <= 40
 %global zig_cache_dir %{_builddir}/zig-cache
 %else
