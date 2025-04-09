@@ -18,7 +18,7 @@
 %else
 %global zig_cache_dir %{builddir}/zig-cache
 %endif
-%global zig_build_options %{shrink: \
+%dnl %global zig_build_options %{shrink: \
     --verbose \
     --release=fast \
     --summary all \
@@ -36,7 +36,7 @@
     -Dno-langref=true \
     -Dstd-docs=false \
     -Dpie \
-#    -Dconfig_h="%{__cmake_builddir}/config.h" \
+    -Dconfig_h="%{__cmake_builddir}/config.h" \
     -Dbuild-id="sha1" \
 }
 %global zig_install_options %zig_build_options %{shrink: \
@@ -156,7 +156,7 @@ export CXX=g++-14
 %cmake_build
 %else
 %cmake_build --target zigcpp
-zig build %{zig_build_options}
+zig build
 
 # Zig has no official manpage
 # https://github.com/ziglang/zig/issues/715
