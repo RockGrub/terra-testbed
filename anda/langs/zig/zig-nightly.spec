@@ -12,13 +12,12 @@
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
-%bcond gcc14     0
 %if 0%{?fedora} <= 40
 %global zig_cache_dir %{_builddir}/zig-cache
 %else
 %global zig_cache_dir %{builddir}/zig-cache
 %endif
-%dnl %global zig_build_options %{shrink: \
+%global zig_build_options %{shrink: \
     --verbose \
     --release=fast \
     --summary all \
@@ -26,18 +25,18 @@
     -Dtarget=native \
     -Dcpu=baseline \
     --zig-lib-dir lib \
+    --build-id=sha1 \
     \
     --cache-dir "%{zig_cache_dir}" \
     --global-cache-dir "%{zig_cache_dir}" \
     \
-    -Dversion-string="%{ver}" \
+    -Dversion-string="%{version}" \
     -Dstatic-llvm=false \
     -Denable-llvm=true \
     -Dno-langref=true \
     -Dstd-docs=false \
     -Dpie \
     -Dconfig_h="%{__cmake_builddir}/config.h" \
-    -Dbuild-id="sha1" \
 }
 %global zig_install_options %zig_build_options %{shrink: \
     --prefix "%{_prefix}" \
@@ -63,10 +62,6 @@ Patch0:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14
 Patch1:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
-%if %{with gcc14}
-BuildRequires: gcc14
-BuildRequires: gcc14-c++
-%endif
 BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
@@ -129,10 +124,6 @@ Documentation for Zig. For more information, visit %{url}
 %autosetup -p1 -n zig-%{ver}
 
 %build
-%if %{with gcc14}
-export CC=gcc-14
-export CXX=g++-14
-%endif
 # zig doesn't know how to dynamically link llvm on its own so we need cmake to generate a header ahead of time
 # if we provide the header we need to also build zigcpp
 
@@ -153,10 +144,10 @@ export CXX=g++-14
     -DZIG_VERSION:STRING="%{ver}"
 
 %if %{with bootstrap}
-%cmake_build
+%cmake_build --target stage3
 %else
 %cmake_build --target zigcpp
-zig build
+zig build %{zig_build_options}
 
 # Zig has no official manpage
 # https://github.com/ziglang/zig/issues/715
