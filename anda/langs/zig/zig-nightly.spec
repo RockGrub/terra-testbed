@@ -50,13 +50,14 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
+BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
-BuildRequires:  cmake
 BuildRequires:  libxml2-devel
 BuildRequires:  llvm%{?llvm_compat}-devel
 BuildRequires:  clang%{?llvm_compat}-devel
 BuildRequires:  lld%{?llvm_compat}-devel
+BuildRequires:  zlib-devel
 # for man page generation
 BuildRequires:  help2man
 # for signature verification
