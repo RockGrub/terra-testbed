@@ -50,8 +50,6 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
-# https://github.com/ziglang/zig/pull/22516
-Patch0:         https://src.fedoraproject.org/fork/sentry/rpms/zig/raw/fork/0.14.0/f/0002-std.Build-add-build-id-option.patch
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
