@@ -8,7 +8,7 @@
 %define         llvm_compat 19
 %endif
 %global         llvm_version 19.0.0
-%global         ver 0.15.0-dev.208+8acedfd5b
+%global         ver 0.15.0-dev.369+1a2ceb36c
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
@@ -54,9 +54,9 @@ BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  libxml2-devel
-BuildRequires:  llvm%{?llvm_compat}-devel
-BuildRequires:  clang%{?llvm_compat}-devel
-BuildRequires:  lld%{?llvm_compat}-devel
+BuildRequires:  llvm-devel
+BuildRequires:  clang-devel
+BuildRequires:  lld-devel
 BuildRequires:  zlib-devel
 # for man page generation
 BuildRequires:  help2man
