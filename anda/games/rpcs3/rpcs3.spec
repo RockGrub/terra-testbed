@@ -2,7 +2,7 @@
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 
 Name:           rpcs3
-Version:        0.0.35
+Version:        0.0.36
 Release:        1%?dist
 Summary:        PlayStation 3 emulator and debugger
 License:        GPL-2.0-only
