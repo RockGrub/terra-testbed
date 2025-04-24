@@ -49,9 +49,8 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
-Patch0:         https://src.fedoraproject.org/rpms/zig/blob/rawhide/f/0001-remove-native-lib-directories-from-rpath.patch
 %ifarch aarch64
-Patch1:         https://src.fedoraproject.org/rpms/zig/blob/rawhide/f/0003-increase-upper-bounds-of-main-zig-executable-to-9G.patch
+Patch0:         https://src.fedoraproject.org/rpms/zig/blob/rawhide/f/0003-increase-upper-bounds-of-main-zig-executable-to-9G.patch
 %endif
 BuildRequires:  cmake
 BuildRequires:  gcc
