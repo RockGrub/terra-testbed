@@ -2,13 +2,12 @@
 %global         zig_arches x86_64 aarch64 riscv64 %{mips64}
 # Signing key from https://ziglang.org/download/
 %global         public_key RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U
-
-# note here at which Fedora or EL release we need to use compat LLVM packages
+# Not needed yet
 %if 0%{?fedora} >= 42 || 0%{?rhel} >= 9
-%define         llvm_compat 19
+%define         llvm_compat 20
 %endif
-%global         llvm_version 19.0.0
-%global         ver 0.15.0-dev.369+1a2ceb36c
+%global         llvm_version 20.0.0
+%global         ver 0.15.0-dev.383+927f233ff
 %bcond bootstrap 1
 %bcond docs      %{without bootstrap}
 %bcond test      1
@@ -42,7 +41,7 @@
     --prefix "%{_prefix}" \
 }
 
-Name:           zig-nightly
+Name:           zig-master
 Version:        %(echo %{ver} | sed 's/-/~/g')
 Release:        1%{?dist}
 Summary:        Programming language for maintaining robust, optimal, and reusable software
@@ -50,6 +49,10 @@ License:        MIT AND NCSA AND LGPL-2.1-or-later AND LGPL-2.1-or-later WITH GC
 URL:            https://ziglang.org
 Source0:        %{url}/builds/zig-%{ver}.tar.xz
 Source1:        %{url}/builds/zig-%{ver}.tar.xz.minisig
+Patch0:         https://src.fedoraproject.org/rpms/zig/blob/rawhide/f/0001-remove-native-lib-directories-from-rpath.patch
+%ifarch aarch64
+Patch1:         https://src.fedoraproject.org/rpms/zig/blob/rawhide/f/0003-increase-upper-bounds-of-main-zig-executable-to-9G.patch
+%endif
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
