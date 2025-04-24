@@ -1,8 +1,5 @@
 project pkg {
 	rpm {
-		spec = "zig-nightly.spec"
+		spec = "zig-master.spec"
 	}
-	labels {
-	    nightly = 1
-    }
 }
