@@ -53,8 +53,8 @@ BuildRequires:  gcc14-c++
 %git_clone %url v%version
 
 %build
-export CC=gcc-14
-export CXX=g++-14
+export CC=clang
+export CXX=clang++
 %cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF\
     -DUSE_NATIVE_INSTRUCTIONS=OFF                      \
     -DCMAKE_C_FLAGS="$CFLAGS"                          \
