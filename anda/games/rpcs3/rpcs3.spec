@@ -41,8 +41,6 @@ BuildRequires:  pkgconfig(wayland-cursor)
 #BuildRequires:  pkgconfig(wayland-eglstream)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
-BuildRequires:  gcc14
-BuildRequires:  gcc14-c++
 
 %description
 %summary.
