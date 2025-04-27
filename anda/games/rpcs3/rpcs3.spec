@@ -1,4 +1,4 @@
-%dnl %global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
+%global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 
 Name:           rpcs3
@@ -63,7 +63,7 @@ BuildRequires:  gcc14-c++
     -DUSE_SDL=ON                                       \
     -DCMAKE_AR="$AR"                                   \
     -DCMAKE_RANLIB="$RANLIB"                           \
-#    -DUSE_SYSTEM_SDL=ON                                \
+    -DUSE_SYSTEM_SDL=ON                                \
     -DUSE_SYSTEM_CURL=ON                               \
     -DUSE_SYSTEM_FFMPEG=ON                             \
     -DUSE_SYSTEM_OPENCV=ON                             \
