@@ -1,5 +1,5 @@
 %global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
-%global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
+%global _distro_extra_cxxflags -include %_includedir/c++/14/cstdint
 
 Name:           rpcs3
 Version:        0.0.36
