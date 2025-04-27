@@ -1,5 +1,5 @@
-%global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
-%global _distro_extra_cxxflags -include %_includedir/c++/14/cstdint
+%dnl %global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
+%global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 
 Name:           rpcs3
 Version:        0.0.36
@@ -51,8 +51,8 @@ BuildRequires:  gcc14-c++
 %git_clone %url v%version
 
 %build
-export CC=gcc-14
-export CXX=g++-14
+#export CC=gcc-14
+#export CXX=g++-14
 %cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF\
     -DUSE_NATIVE_INSTRUCTIONS=OFF                      \
     -DCMAKE_C_FLAGS="$CFLAGS"                          \
