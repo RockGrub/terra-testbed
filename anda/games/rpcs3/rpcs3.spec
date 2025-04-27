@@ -53,8 +53,8 @@ BuildRequires:  gcc14-c++
 %git_clone %url v%version
 
 %build
-export CC=clang
-export CXX=clang++
+export CC=gcc-14
+export CXX=g++-14
 %cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF\
     -DUSE_NATIVE_INSTRUCTIONS=OFF                      \
     -DCMAKE_C_FLAGS="$CFLAGS"                          \
@@ -63,8 +63,6 @@ export CXX=clang++
     -DUSE_SYSTEM_FAUDIO=ON                             \
     -DUSE_PRECOMPILED_HEADERS=OFF                      \
     -DUSE_SDL=ON                                       \
-#    -DCMAKE_AR="$AR"                                   \
-#    -DCMAKE_RANLIB="$RANLIB"                           \
     -DUSE_SYSTEM_SDL=ON                                \
     -DUSE_SYSTEM_CURL=ON                               \
     -DUSE_SYSTEM_FFMPEG=ON                             \
