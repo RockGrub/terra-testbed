@@ -1,5 +1,5 @@
 %global _distro_extra_cflags -Wno-maybe-uninitialized
-%global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
+%global _distro_extra_cxxflags -include %_includedir/c++/14/cstdint
 
 Name:           rpcs3
 Version:        0.0.36
@@ -41,6 +41,9 @@ BuildRequires:  pkgconfig(wayland-cursor)
 #BuildRequires:  pkgconfig(wayland-eglstream)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
+BuildRequires:  gcc14
+BuildRequires:  gcc14-c++
+
 
 %description
 %summary.
@@ -49,8 +52,8 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 %git_clone %url v%version
 
 %build
-#export CC=gcc-14
-#export CXX=g++-14
+export CC=gcc-14
+export CXX=g++-14
 %cmake -DDISABLE_LTO=TRUE -DZSTD_BUILD_SHARED=ON -DZSTD_BUILD_STATIC=OFF\
     -DUSE_NATIVE_INSTRUCTIONS=OFF                      \
     -DCMAKE_C_FLAGS="$CFLAGS"                          \
@@ -59,8 +62,8 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
     -DUSE_SYSTEM_FAUDIO=ON                             \
     -DUSE_PRECOMPILED_HEADERS=OFF                      \
     -DUSE_SDL=ON                                       \
-    -DCMAKE_AR="$AR"                                   \
-    -DCMAKE_RANLIB="$RANLIB"                           \
+#    -DCMAKE_AR="$AR"                                   \
+#    -DCMAKE_RANLIB="$RANLIB"                           \
     -DUSE_SYSTEM_SDL=ON                                \
     -DUSE_SYSTEM_CURL=ON                               \
     -DUSE_SYSTEM_FFMPEG=ON                             \
