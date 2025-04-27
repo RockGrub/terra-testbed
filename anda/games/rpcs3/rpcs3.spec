@@ -1,4 +1,4 @@
-%global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin
+%dnl %global _distro_extra_cflags -Wno-maybe-uninitialized -fuse-linker-plugin -fuse-ld=mold
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 
 Name:           rpcs3
