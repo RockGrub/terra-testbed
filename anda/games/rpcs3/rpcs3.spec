@@ -63,12 +63,12 @@ BuildRequires:  gcc14-c++
     -DUSE_SDL=ON                                       \
     -DCMAKE_AR="$AR"                                   \
     -DCMAKE_RANLIB="$RANLIB"                           \
-    -DUSE_SYSTEM_SDL=ON                                \
+#    -DUSE_SYSTEM_SDL=ON                                \
     -DUSE_SYSTEM_CURL=ON                               \
     -DUSE_SYSTEM_FFMPEG=ON                             \
     -DUSE_SYSTEM_OPENCV=ON                             \
     -DUSE_DISCORD_RPC=ON                               \
-    -DOpenGL_GL_PREFERENCE=LEGACY                      \
+    -DOpenGL_GL_PREFERENCE=LEGACY                      
 %cmake_build
 
 %install
