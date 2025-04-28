@@ -43,6 +43,9 @@ setenv NVCC_CCBIN 'g++-%{gcc_major}'
 #setenv NVCC_PREPEND_FLAGS '-ccbin %{_bindir}/g++-%{gcc_major}'
 EOF
 
+echo %{?fedora}
+echo %{gcc_major}
+
 %files
 %config(noreplace) %{_sysconfdir}/profile.d/%{name}.csh
 %config(noreplace) %{_sysconfdir}/profile.d/%{name}.sh
