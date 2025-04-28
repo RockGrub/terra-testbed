@@ -51,6 +51,7 @@ BuildRequires:  gcc14-c++
 
 %prep
 %git_clone %url v%version
+echo %{?fedora}
 
 %build
 export CC=clang
