@@ -1,4 +1,5 @@
-%if 0%{?fedora} < 42 || 0%{?rhel} <= 10
+%if %{?fedora} < 42
+%elif %{?rhel}
 %global gcc_major 13
 %else
 %global gcc_major 14
