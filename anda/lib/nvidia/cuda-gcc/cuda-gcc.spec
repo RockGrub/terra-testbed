@@ -1,4 +1,4 @@
-%if 0%{?fedora} >= 041 || 0%{?rhel} <= 010
+%if 0%{?fedora} >= 041 || 0%{?rhel}
 %global gcc_major 13
 %else
 %global gcc_major 14
