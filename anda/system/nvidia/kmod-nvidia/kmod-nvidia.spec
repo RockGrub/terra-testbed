@@ -44,6 +44,7 @@ depend upon the specific ABI provided by a range of releases of the same variant
 of the Linux kernel and not on any one specific build.
 
 %prep
+rpm -q kernel | sed 's/kernel-//g'
 %autosetup -p1 -n open-gpu-kernel-modules-%{version}
 
 echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
