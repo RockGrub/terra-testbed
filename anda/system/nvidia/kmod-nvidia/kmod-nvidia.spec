@@ -5,7 +5,8 @@
 # Generate kernel symbols requirements:
 %global _use_internal_dependency_generator 0
 
-%{!?kversion: %global kversion %(uname -r)}
+# uname -r does not work in GitHub runners
+%{!?kversion: %global kversion %(rpm -q kernel | sed 's/kernel-//g)}
 
 Name:           kmod-%{kmod_name}
 Version:        575.51.02
