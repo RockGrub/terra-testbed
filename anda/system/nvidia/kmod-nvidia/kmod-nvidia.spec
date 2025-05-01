@@ -28,6 +28,7 @@ Patch3:         fix-build-in-actions.patch
 BuildRequires:  elfutils-libelf-devel
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  kernel
 BuildRequires:  kernel-abi-stablelists
 BuildRequires:  kernel-devel
 BuildRequires:  kernel-rpm-macros
@@ -44,6 +45,7 @@ depend upon the specific ABI provided by a range of releases of the same variant
 of the Linux kernel and not on any one specific build.
 
 %prep
+uname -r
 rpm -q kernel | sed 's/kernel-//g'
 %autosetup -p1 -n open-gpu-kernel-modules-%{version}
 
