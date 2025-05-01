@@ -1,0 +1,30 @@
+--- a/Makefile	2025-04-30 21:06:11.124112043 -0500
++++ b/Makefile	2025-04-30 21:09:33.052703640 -0500
+@@ -26,7 +26,7 @@
+   ifdef SYSSRC
+     KERNEL_SOURCES := $(SYSSRC)
+   else
+-    KERNEL_UNAME ?= $(shell uname -r)
++    KERNEL_UNAME ?= $(shell rpm -q kernel | sed 's/kernel-//g')
+     KERNEL_MODLIB := /lib/modules/$(KERNEL_UNAME)
+     KERNEL_SOURCES := $(shell ((test -d $(KERNEL_MODLIB)/source && echo $(KERNEL_MODLIB)/source) || (test -d $(KERNEL_MODLIB)/build/source && echo $(KERNEL_MODLIB)/build/source)) || echo $(KERNEL_MODLIB)/build)
+   endif
+@@ -40,7 +40,7 @@
+       KBUILD_PARAMS := KBUILD_OUTPUT=$(KERNEL_OUTPUT)
+     endif
+   else
+-    KERNEL_UNAME ?= $(shell uname -r)
++    KERNEL_UNAME ?= $(shell rpm -q kernel | sed 's/kernel-//g')
+     KERNEL_MODLIB := /lib/modules/$(KERNEL_UNAME)
+     # $(filter patter...,text) - Returns all whitespace-separated words in text that
+     # do match any of the pattern words, removing any words that do not match.
+@@ -98,7 +98,8 @@
+   PAHOLE_VARIABLES=$(if $(wildcard $(KERNEL_SOURCES)/scripts/pahole-flags.sh),,"PAHOLE=$(AWK) '$(PAHOLE_AWK_PROGRAM)'")
+ 
+   ifndef ARCH
+-    ARCH := $(shell uname -m | sed -e 's/i.86/i386/' \
++    ARCH := $(shell rpm -q kernel | sed -e 's/kernel-//g' \
++      -e 's/i.86/i386/' \
+       -e 's/armv[0-7]\w\+/arm/' \
+       -e 's/aarch64/arm64/' \
+       -e 's/ppc64le/powerpc/' \
