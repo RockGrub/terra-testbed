@@ -6,7 +6,7 @@
 %global _use_internal_dependency_generator 0
 
 # uname -r does not work in GitHub runners
-%{!?kversion: %global kversion %(rpm -q kernel | sed 's/kernel-//g')}
+%{!?kversion: %global kversion %(rpm -q kernel-devel | sed 's/kernel-devel-//g')}
 
 Name:           kmod-%{kmod_name}
 Version:        570.144
