@@ -23,7 +23,8 @@ Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/refs/t
 # https://git.almalinux.org/ngompa/nvidia-kmod-el-rpm/
 Patch1:         %{name}-ldflags.patch
 Patch2:         %{name}-no-hostname-whoami.patch
-Patch3:         fix-build-in-actions.patch
+# This is needed for the Makefile for the beta drivers, added just in case it's needed in the future
+%dnl Patch3:         fix-build-in-actions.patch
 
 BuildRequires:  elfutils-libelf-devel
 BuildRequires:  gcc
