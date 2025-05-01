@@ -1,5 +1,5 @@
---- a/Makefile	2025-04-30 21:06:11.124112043 -0500
-+++ b/Makefile	2025-04-30 21:09:33.052703640 -0500
+--- a/kernel-open/Makefile	2025-04-30 21:06:11.124112043 -0500
++++ b/kernel-open/Makefile	2025-04-30 21:09:33.052703640 -0500
 @@ -26,7 +26,7 @@
    ifdef SYSSRC
      KERNEL_SOURCES := $(SYSSRC)
