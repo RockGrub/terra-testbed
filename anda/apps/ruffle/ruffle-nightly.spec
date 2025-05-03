@@ -42,7 +42,7 @@ Packager:       madonuko <mado@fyralabs.com>
 %cargo_prep_online
 ls
 cat .cargo/config
-cat cargo/config.toml
+cat .cargo/config.toml
 ls .cargo/
 echo 'Cargo.toml:'
 cat Cargo.toml
