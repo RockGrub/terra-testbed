@@ -54,14 +54,12 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 
 %build
 %{cargo_license_online} > LICENSE.dependencies
-%cargo_build
 
 %install
-cd desktop
 %cargo_install
-install -Dm644 packages/linux/rs.ruffle.Ruffle.svg %buildroot%_iconsdir/hicolor/scalable/apps/rs.ruffle.Ruffle.svg
-install -Dm644 packages/linux/rs.ruffle.Ruffle.desktop %buildroot%_datadir/applications/rs.ruffle.Ruffle.desktop
-install -Dm644 packages/linux/rs.ruffle.Ruffle.metainfo.xml %buildroot%_metainfodir/rs.ruffle.Ruffle.metainfo.xml
+install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.svg %buildroot%_iconsdir/hicolor/scalable/apps/rs.ruffle.Ruffle.svg
+install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.desktop %buildroot%_datadir/applications/rs.ruffle.Ruffle.desktop
+install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.metainfo.xml %buildroot%_metainfodir/rs.ruffle.Ruffle.metainfo.xml
 
 %check
 desktop-file-validate %buildroot%_datadir/applications/rs.ruffle.Ruffle.desktop
