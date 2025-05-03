@@ -54,6 +54,7 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 
 %build
 %{cargo_license_online} > LICENSE.dependencies
+%cargo_build
 
 %install
 cd desktop
