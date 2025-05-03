@@ -53,6 +53,7 @@ echo '^ Cargo.lock ^'
 desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/packages/linux/rs.ruffle.Ruffle.desktop
 
 %build
+cd desktop
 %cargo_build
 
 %install
