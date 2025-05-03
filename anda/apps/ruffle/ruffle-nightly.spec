@@ -40,16 +40,6 @@ Packager:       madonuko <mado@fyralabs.com>
 %prep
 %autosetup -n ruffle-nightly-%ver -p1
 %cargo_prep_online
-ls
-cat .cargo/config
-cat .cargo/config.toml
-ls .cargo/
-echo 'Cargo.toml:'
-cat Cargo.toml
-echo '^ Cargo.toml ^'
-echo 'Cargo.lock:'
-cat Cargo.lock 
-echo '^ Cargo.lock ^'
 desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/packages/linux/rs.ruffle.Ruffle.desktop
 
 %build
@@ -57,7 +47,7 @@ cd desktop
 %cargo_build
 
 %install
-ls rpm/
+ls target/rpm/
 install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.svg %buildroot%_iconsdir/hicolor/scalable/apps/rs.ruffle.Ruffle.svg
 install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.desktop %buildroot%_datadir/applications/rs.ruffle.Ruffle.desktop
 install -Dm644 desktop/packages/linux/rs.ruffle.Ruffle.metainfo.xml %buildroot%_metainfodir/rs.ruffle.Ruffle.metainfo.xml
