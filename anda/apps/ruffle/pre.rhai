@@ -1,0 +1,1 @@
+sh(`ARCH=$(arch) dnf in -y https://kojipkgs.fedoraproject.org//packages/curl/8.13.0/1.fc43/$ARCH/libcurl-8.13.0-1.fc43.$ARCH.rpm https://kojipkgs.fedoraproject.org//packages/curl/8.13.0/1.fc43/$ARCH/libcurl-8.13.0-1.fc43.$ARCH.rpm`, #{});
