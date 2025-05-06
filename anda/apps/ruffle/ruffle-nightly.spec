@@ -44,6 +44,7 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 
 %build
 cd desktop
+%{__cargo} --version
 %cargo_build
 
 %install
