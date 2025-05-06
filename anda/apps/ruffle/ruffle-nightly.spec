@@ -24,6 +24,12 @@ BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(xcb-cursor)
+%if 0%{?fedora} == 43
+BuildRequires:  curl < 8.14.0~rc1
+BuildRequires:  libcurl < 8.14.0~rc1
+BuildConflicts: curl >= 8.14.0~rc1
+BuildConflicts: libcurl >= 8.14.0~rc1
+%endif
 Packager:       madonuko <mado@fyralabs.com>
 
 %description %_description
@@ -44,11 +50,7 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 
 %build
 cd desktop
-%if 0%{?fedora} == 43
-env CARGO_HTTP_MULTIPLEXING=false %cargo_build
-%else
 %cargo_build
-%endif
 
 %install
 ls target/rpm/
