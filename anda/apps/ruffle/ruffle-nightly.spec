@@ -45,9 +45,10 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 %build
 cd desktop
 %if 0%{?fedora} == 43
-export CARGO_HTTP_MULTIPLEXING=false
-%endif
+env CARGO_HTTP_MULTIPLEXING=false %cargo_build
+%else
 %cargo_build
+%endif
 
 %install
 ls target/rpm/
