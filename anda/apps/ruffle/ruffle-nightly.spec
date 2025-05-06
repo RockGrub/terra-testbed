@@ -24,7 +24,6 @@ BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(xcb-cursor)
-BuildRequires:  libcurl < 8.14.0~rc1
 Packager:       madonuko <mado@fyralabs.com>
 
 %description %_description
