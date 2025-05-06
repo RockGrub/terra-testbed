@@ -1,6 +1,6 @@
 project pkg {
     rpm {
         spec = "ruffle-nightly.spec"
-        extra_repos = ["file://./anda-build/rpm/rpms"]
+        extra_repos = ["file:///__w/terra-testbed/terra-testbed/rpms"]
     }
 }
