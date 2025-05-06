@@ -27,6 +27,9 @@ BuildRequires:  pkgconfig(xcb-cursor)
 %if 0%{?fedora} == 43
 BuildRequires:  curl < 8.14.0~rc1
 BuildRequires:  libcurl < 8.14.0~rc1
+BuildConflicts: curl >= 8.14.0~rc1
+BuildConflicts: libcurl >= 8.14.0~rc1
+BuildCinflicts  libcurl-minimal >= 8.14.0~rc1
 %endif
 Packager:       madonuko <mado@fyralabs.com>
 
