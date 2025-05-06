@@ -45,7 +45,7 @@ desktop-file-edit --set-key=Exec --set-value="ruffle_desktop %u" desktop/package
 %build
 cd desktop
 %if 0%{?fedora} == 43
-export CARGO_NET_GIT_FETCH_WITH_CLI=true
+export CARGO_HTTP_MULTIPLEXING=false
 %endif
 %cargo_build
 
