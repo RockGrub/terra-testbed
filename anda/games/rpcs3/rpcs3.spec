@@ -5,8 +5,8 @@
 %global build_cxxflags %(echo %{__build_flags_lang_cxx} | sed 's/-Wp,-D_GLIBCXX_ASSERTIONS//g') %{?_distro_extra_cxxflags}
 %ifarch aarch64
 # Need to get rid of everything Clang can't use and undefine -Wunused-command-line-argument where possible due to the project's build flags
-%global build_cflags %(echo %{build_cflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-hardened-ld //g' | sed 's/specs=/usr/lib/rpm/redhat/redhat-hardened-ld-errors //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-package-notes //g') -Wno-unused-command-line-argument
-%global build_cxxflags %(echo %{build_cxxflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-hardened-ld //g' | sed 's/specs=/usr/lib/rpm/redhat/redhat-hardened-ld-errors //g' | sed 's/-specs=/usr/lib/rpm/redhat/redhat-package-notes //g') -Wno-unused-command-line-argument
+%global build_cflags %(echo %{build_cflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-annobin-cc1 //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-hardened-ld //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-hardened-ld-errors //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-package-notes //g') -Wno-unused-command-line-argument
+%global build_cxxflags %(echo %{build_cxxflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-annobin-cc1 //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-hardened-ld //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-hardened-ld-errors //g' | sed 's/-specs\=/usr/lib/rpm/redhat/redhat-package-notes //g') -Wno-unused-command-line-argument
 %endif
 %global commit 62055bed3f69cbc2fa10f3fddd35d4c9278838bc
 %global ver 0.0.36-17949
@@ -84,11 +84,8 @@ export CXX=clang++
     -DUSE_SYSTEM_FFMPEG=ON                             \
     -DUSE_SYSTEM_OPENCV=ON                             \
 %if 0%{?fedora} < 43
-    -DUSE_SYSTEM_CURL=ON                               \
+    -DUSE_SYSTEM_CURL=ON
 %endif
-#    -DOpenGL_GL_PREFERENCE=LEGACY                      \
-#    -DCMAKE_AR="$AR"                                   \ # Breaks the build
-#    -DCMAKE_RANLIB="$RANLIB"                           \ # Also breaks the build
 %cmake_build
 
 %install
