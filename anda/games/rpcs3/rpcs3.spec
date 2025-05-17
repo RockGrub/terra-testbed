@@ -17,7 +17,7 @@ Summary:        PlayStation 3 emulator and debugger
 License:        GPL-2.0-only
 URL:            https://github.com/RPCS3/rpcs3
 %dnl Source0:        %url/archive/refs/tags/v%version.tar.gz
-BuildRequires:  glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ git-core mold
+BuildRequires:  anda-srpm-macros glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ git-core mold
 BuildRequires:  cmake(FAudio)
 BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
