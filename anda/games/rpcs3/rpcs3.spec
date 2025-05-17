@@ -3,10 +3,6 @@
 # GLIBCXX_ASSERTIONS is known to break RPCS3
 %global build_cflags %(echo %{__build_flags_lang_c} | sed 's/-Wp,-D_GLIBCXX_ASSERTIONS//g') %{?_distro_extra_cflags}
 %global build_cxxflags %(echo %{__build_flags_lang_cxx} | sed 's/-Wp,-D_GLIBCXX_ASSERTIONS//g') %{?_distro_extra_cxxflags}
-%ifarch aarch64
-%global build_cflags %(echo %{build_cflags} | sed 's/-Wall //g' | sed 's/-Wformat-security //g' | sed 's/-Werror=format-security //g' | sed 's/-Werror //g') -Wno-error=old-style-cast
-%global build_cxxflags %(echo %{build_cxxflags} | sed 's/-Wall //g' | sed 's/-Wformat-security //g' | sed 's/-Werror=format-security //g' | sed 's/-Werror //g') -Wno-old-style-cast -Wno-error=old-style-cast
-%endif
 %global commit 62055bed3f69cbc2fa10f3fddd35d4c9278838bc
 %global ver 0.0.36-17949
 
@@ -17,7 +13,7 @@ Summary:        PlayStation 3 emulator and debugger
 License:        GPL-2.0-only
 URL:            https://github.com/RPCS3/rpcs3
 %dnl Source0:        %url/archive/refs/tags/v%version.tar.gz
-BuildRequires:  anda-srpm-macros glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ git-core mold
+BuildRequires:  anda-srpm-macros glew openal-soft cmake vulkan-validation-layers gcc gcc-c++ clang git-core mold
 BuildRequires:  cmake(FAudio)
 BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
@@ -55,15 +51,13 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 
 %prep
 %git_clone %url %commit
-%ifarch aarch64
-sed -i 's/-Wold-style-cast //g' $(find . -name Makefile -or -name CMakeLists.txt)
-sed -i 's/-Werror=old-style-cast //g' $(find . -name Makefile -or -name CMakeLists.txt)
-#sed -i 's/-Wall //g' $(find . -name Makefile -or -name CMakeLists.txt)
-#sed -i 's/-Wextra //g' $(find . -name Makefile -or -name CMakeLists.txt)
-sed -i 's/-Werror //g' $(find . -name Makefile -or -name CMakeLists.txt)
-%endif
 
 %build
+%ifarch aarch64
+# Looking at the CMakeLists.txt, this is the intended compiler and there are no fixes for GCC on aarch64
+export CC=clang
+export CXX=clang++
+%endif
 %cmake -DDISABLE_LTO=TRUE                              \
     -DZSTD_BUILD_SHARED=OFF                            \
     -DZSTD_BUILD_STATIC=ON                             \
@@ -76,14 +70,15 @@ sed -i 's/-Werror //g' $(find . -name Makefile -or -name CMakeLists.txt)
     -DUSE_SYSTEM_SDL=ON                                \
     -DBUILD_LLVM=OFF                                   \
     -DUSE_PRECOMPILED_HEADERS=OFF                      \
-#    -DCMAKE_AR="$AR"                                   \
-#    -DCMAKE_RANLIB="$RANLIB"                           \
-#    -DUSE_SYSTEM_WOLFSSL=OFF                            \
-#    -DUSE_SYSTEM_CURL=ON                               \
-#    -DUSE_SYSTEM_FFMPEG=ON                             \
-#    -DUSE_SYSTEM_OPENCV=ON                             \
-#    -DUSE_DISCORD_RPC=ON                               \
+    -DUSE_DISCORD_RPC=ON                               \
+    -DUSE_SYSTEM_FFMPEG=ON                             \
+    -DUSE_SYSTEM_OPENCV=ON                             \
+%if 0%{?fedora} < 43
+    -DUSE_SYSTEM_CURL=ON                               \  # Don't use this on Rawhide, it is a broken RC candidate
+%endif
 #    -DOpenGL_GL_PREFERENCE=LEGACY                      \
+#    -DCMAKE_AR="$AR"                                   \ # Breaks the build
+#    -DCMAKE_RANLIB="$RANLIB"                           \ # Also breaks the build
 %cmake_build
 
 %install
