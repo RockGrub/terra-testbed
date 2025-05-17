@@ -3,6 +3,10 @@
 # GLIBCXX_ASSERTIONS is known to break RPCS3
 %global build_cflags %(echo %{__build_flags_lang_c} | sed 's/-Wp,-D_GLIBCXX_ASSERTIONS//g') %{?_distro_extra_cflags}
 %global build_cxxflags %(echo %{__build_flags_lang_cxx} | sed 's/-Wp,-D_GLIBCXX_ASSERTIONS//g') %{?_distro_extra_cxxflags}
+%ifarch aarch64
+%global build_cflags %(echo %{build_cflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument//g')
+%global build_cxxflags %(echo %{build_cxxflags} | sed 's/-Werror //g' | sed 's/-Wunused-command-line-argument//g')
+%endif
 %global commit 62055bed3f69cbc2fa10f3fddd35d4c9278838bc
 %global ver 0.0.36-17949
 
@@ -74,7 +78,7 @@ export CXX=clang++
     -DUSE_SYSTEM_FFMPEG=ON                             \
     -DUSE_SYSTEM_OPENCV=ON                             \
 %if 0%{?fedora} < 43
-    -DUSE_SYSTEM_CURL=ON                               \  # Don't use this on Rawhide, it is a broken RC candidate
+    -DUSE_SYSTEM_CURL=ON                               \
 %endif
 #    -DOpenGL_GL_PREFERENCE=LEGACY                      \
 #    -DCMAKE_AR="$AR"                                   \ # Breaks the build
