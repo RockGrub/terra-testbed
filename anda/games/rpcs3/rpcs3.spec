@@ -56,10 +56,11 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 %prep
 %git_clone %url %commit
 %ifarch aarch64
-sed -i 's/-Wold-style-cast //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
-sed -i 's/-Werror=old-style-cast //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
-sed -i 's/-Wall //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
-sed -i 's/-Wextra //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
+sed -i 's/-Wold-style-cast//g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
+sed -i 's/-Werror=old-style-cast//g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
+#sed -i 's/-Wall //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
+#sed -i 's/-Wextra //g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
+sed -i 's/-Werror//g' $(find 3rdparty -name Makefile -or -name CMakeLists.txt)
 %endif
 
 %build
