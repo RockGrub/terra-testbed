@@ -4,7 +4,7 @@ Release:        1%?dist
 Summary:        Flashcard program for using space repetition learning
 License:        AGPL-3.0-or-later AND GPL-3.0-or-later AND LGPL-3.0-or-later AND MIT AND BSD-3-Clause AND CC-BY-SA-3.0 AND CC-BY-3.0 AND Apache-2.0 AND CC-BY-2.5
 URL:            https://apps.ankiweb.net/
-BuildRequires:  python3-devel python3-setuptools python3-waitress python3-protobuf python3-pysocks rpm_macro(fdupes) protobuf-compiler
+BuildRequires:  python3-devel python3-setuptools python3-waitress python3-protobuf python3-pysocks rpm_macro(fdupes) protobuf-compiler yarnpkg
 BuildRequires:  python3-distro python3-flask-cors python3-jsonschema python3-send2trash python3-certifi python3-simplejson
 BuildRequires:  python3-installer make mold cargo git rsync ninja-build libxcrypt-compat nodejs python3.9 python-unversioned-command gcc python3-pyqt6-webengine
 BuildRequires:  python3-qt5 python3-qt5-devel python3-pyqt6 python3-pyqt6-devel
@@ -34,6 +34,7 @@ git checkout %{version}
 export PYTHON_BINARY=$(which python)
 export PROTOC_BINARY=$(which protoc)
 export NODE_BINARY=$(which node)
+export YARN_BINARY=$(which yarn)
 export RELEASE=1
 #export PYTHONPATH=%_libdir/python3/dist-packages
 cargo update
