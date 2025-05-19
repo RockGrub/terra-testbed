@@ -31,10 +31,13 @@ git checkout %{version}
 # See https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=anki
 
 %build
+export PYTHON_BINARY=$(which python)
+export PROTOC_BINARY=$(which protoc)
+export NODE_BINARY=$(which node)
 export RELEASE=1
 #export PYTHONPATH=%_libdir/python3/dist-packages
 cargo update
-mold -run ./tools/build
+OFFLINE_BUILD=1 mold -run ./ninja wheels -v
 
 
 %install
