@@ -37,7 +37,7 @@ export NODE_BINARY=$(which node)
 export YARN_BINARY=$(which yarn)
 export RELEASE=1
 #export PYTHONPATH=%_libdir/python3/dist-packages
-cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+cargo fetch --locked --target "%{_arch}-unknown-linux-gnu"
 yarn install --immutable --modules-folder out/node_modules --ignore-scripts
 cargo update
 OFFLINE_BUILD=1 mold -run ./ninja wheels -v
