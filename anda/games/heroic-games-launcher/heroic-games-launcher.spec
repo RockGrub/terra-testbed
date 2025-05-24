@@ -59,18 +59,17 @@ pnpm run download-helper-binaries
 node_modules/.bin/electron-vite build
 %ifarch x86_64
 rm -rf build/bin/arm64
-node_modules/.bin/electron-builder --linux --x64 --dir dist
+node_modules/.bin/electron-builder --linux --x64 AppImage
 %elifarch aarch64
 rm -rf build/bin/x64/{linux,darwin}
-node_modules/.bin/electron-builder --linux --arm64 --dir dist
+node_modules/.bin/electron-builder --linux --arm64 AppImage
 %endif
 
 %install
 mkdir -p %{buildroot}%{_datadir}/%{shortname}
 mv $(find . -iname "*LICENSE*" -not -path "./node_modules/*" -and -not -path "./public/*") .
 mv LICENSE node-font-list.LICENSE
-rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/darwin
-rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/win32
+rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/{darwin,win32}
 %ifarch aarch64
 ### Needs testing once aarch64 Heroic is complete:
 #rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/x64
