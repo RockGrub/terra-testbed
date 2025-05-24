@@ -29,6 +29,7 @@ BuildRequires: gcc-c++
 BuildRequires: git
 BuildRequires: make
 BuildRequires: nodejs
+BuildRequires: nodejs-npm
 BuildRequires: pnpm
 BuildRequires: python3
 Requires:      alsa-lib
@@ -61,11 +62,10 @@ pnpm dist:linux
 mkdir -p %{buildroot}%{_datadir}/%{shortname}
 mv $(find . -iname "*LICENSE*" -not -path "./node_modules/*" -and -not -path "./public/*") .
 mv LICENSE node-font-list.LICENSE
-rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/darwin
-rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/win32
+rm -rf dist/linux-unpacked/resources/app.asar.unpacked/node_modules/font-list/libs/{darwin,win32}
 %ifarch aarch64
-### Needs testing once aarch64 Heroic is complete:
-#rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/x64
+# Keep the x86_64 Windows binaries run through Wine just in case
+rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/x64/{darwin,linux}
 mv dist/linux-arm64-unpacked/* %{buildroot}%{_datadir}/%{shortname}
 %else
 rm -rf dist/linux-unpacked/resources/app.asar.unpacked/build/bin/arm64
