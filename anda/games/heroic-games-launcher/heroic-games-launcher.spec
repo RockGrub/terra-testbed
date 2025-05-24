@@ -59,10 +59,10 @@ pnpm run download-helper-binaries
 node_modules/.bin/electron-vite build
 %ifarch x86_64
 rm -rf build/bin/arm64
-node_modules/.bin/electron-builder --linux --x64
+node_modules/.bin/electron-builder --linux --x64 --dir dist
 %elifarch aarch64
 rm -rf build/bin/x64/{linux,darwin}
-node_modules/.bin/electron-builder --linux --arm64
+node_modules/.bin/electron-builder --linux --arm64 --dir dist
 %endif
 
 %install
