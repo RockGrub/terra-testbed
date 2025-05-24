@@ -58,10 +58,10 @@ pnpm install
 pnpm run download-helper-binaries
 %ifarch x86_64
 rm -rf public/bin/arm64
-pnpm dist:linux
+pnpm dist:linux AppImage
 %elifarch aarch64
 rm -rf public/bin/x64/{linux,darwin}
-pnpm dist:linux
+pnpm dist:linux AppImage
 %endif
 
 %install
