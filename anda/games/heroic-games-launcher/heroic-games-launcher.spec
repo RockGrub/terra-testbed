@@ -30,6 +30,7 @@ BuildRequires: git
 BuildRequires: make
 BuildRequires: nodejs
 BuildRequires: nodejs-npm
+BuildRequires: openjpeg-tools
 BuildRequires: pnpm
 BuildRequires: python3
 Requires:      alsa-lib
