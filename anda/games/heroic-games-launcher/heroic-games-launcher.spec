@@ -60,7 +60,7 @@ pnpm run download-helper-binaries
 rm -rf public/bin/arm64
 pnpm dist:linux --x64
 %elifarch aarch64
-public/bin/x64/{linux,darwin}
+rm -rf public/bin/x64/{linux,darwin}
 pnpm dist:linux --arm64
 %endif
 
