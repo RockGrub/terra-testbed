@@ -56,11 +56,10 @@ desktop-file-edit --set-key=Exec --set-value="/usr/share/%{shortname}/%{shortnam
 %build
 pnpm install
 pnpm run download-helper-binaries
-node_modules/.bin/electron-vite build
 %ifarch x86_64
-node_modules/.bin/electron-builder --linux --x64 --dir
+pnpm dist:linux --x64
 %elifarch aarch64
-node_modules/.bin/electron-builder --linux --arm64 --dir
+pnpm dist:linux --arm64
 %endif
 
 %install
