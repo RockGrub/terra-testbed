@@ -60,7 +60,11 @@ Heroic is a Free and Open Source Epic, GOG, and Amazon Prime Games launcher for 
 %build
 pnpm install
 pnpm run download-helper-binaries
-pnpm dist:linux
+%ifarch x86_64
+pnpm dist:linux --x64
+%elifarch aarch64
+pnpm dist:linux --arm64
+%endif
 
 %install
 mkdir -p %{buildroot}%{_datadir}/%{shortname}
