@@ -704,6 +704,7 @@ BuildArch:      noarch
 %package -n     js-async-value
 
 %prep
+set -o igncr
 %autosetup -n %{srcmodule}/node_modules
 #tar xjf %{SOURCE1}
 
