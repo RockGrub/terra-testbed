@@ -705,10 +705,8 @@ BuildArch:      noarch
 %package -n     js-async-value
 
 %prep
-%autosetup -n %{srcmodule}/node_modules
+%autosetup -n %{srcmodule}/node_modules/%{srcmodule}
 tar xjf %{SOURCE1}
-
-ls
 
 # Remove packages Fedora provides
 rm -rf node_modules/{cjs-module-lexer,uglify-js}
