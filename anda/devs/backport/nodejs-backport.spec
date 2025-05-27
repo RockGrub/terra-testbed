@@ -578,6 +578,7 @@ BuildRequires: nodejs-devel
 BuildRequires: nodejs-packaging
 BuildRequires: npm
 BuildRequires: uglify-js
+BuildRequires: web-assets-devel
 ExclusiveArch: %{nodejs_arches} noarch
 
 %description
@@ -704,7 +705,7 @@ BuildArch:      noarch
 %package -n     js-async-value
 
 %prep
-%autosetup -n %{srcmodule}
+%autosetup -n %{srcmodule}/node_modules/%{srcmodule}
 tar xjf %{SOURCE1}
 
 # Remove packages Fedora provides
