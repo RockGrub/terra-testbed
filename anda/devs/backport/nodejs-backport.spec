@@ -730,8 +730,6 @@ mv node_modules/async -t %{buildroot}%{_jsdir}
 mkdir -p %{buildroot}%{nodejs_sitelib}/async/dist
 ln -sf %{_jsdir}/async/dist/async.js %{buildroot}%{nodejs_sitelib}/async/dist/async.js
 
-pushd node_modules
-
 ## Explaining the process of these horrible loops, in order:
 # Uglify the JS packages per Fedora packaging standards if they exist (I don't know why they do this?)
 # Account for the different names the *min.js file can have
