@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# Nuke Windows line endings in the CI
+sed 's/\r//g' | bash
+
 ## Some sources need to be fetched BEFORE the build process
 # This is because they are used to mass update the spec
 # This is done ahead of time to update the spec dynamically for pulled versions
