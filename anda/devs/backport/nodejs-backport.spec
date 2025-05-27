@@ -744,54 +744,54 @@ ln -sf %{_jsdir}/async/dist/async.js %{buildroot}%{nodejs_sitelib}/async/dist/as
 # All of this to avoid bundled deps...
 
 for node in $(ls node_modules | sed '/^\@.*/d'); do
-  if [[ $(stat node_modules/$node/${node}.js) ]]; then
+  if [[ $(stat node_modules/$node/${node}.js 2>/dev/null) ]]; then
    mkdir -p %{buildroot}%{_jsdir}/$node
    pushd node_modules/$node
-   if [[ $(stat ${node}-min.js) ]]; then
+   if [[ $(stat ${node}-min.js 2>/dev/null) ]]; then
      mv ${node}-min.js ${node}-min.js.bak
      uglifyjs $node.js -o ${node}-min.js || mv ${node}-min.js.bak ${node}-min.js
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
-     if [[ $(stat ${node}*.map*) ]]; then
+     if [[ $(stat ${node}*.map* 2>/dev/null) ]]; then
          mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
      fi
-   elif [[ $(stat ${node}.min.js) ]]; then
+   elif [[ $(stat ${node}.min.js 2>/dev/null) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
-     if [[ $(stat ${node}*.map*) ]]; then
+     if [[ $(stat ${node}*.map* 2>/dev/null) ]]; then
          mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
      fi
    fi
    mv ${node}.js -t %{buildroot}%{_jsdir}/$node
    ln -sf %{_jsdir}/$node/$node.js $node.js
    popd
-  elif [[ $(stat node_modules/$node/lib/${node}.js) ]]; then
+  elif [[ $(stat node_modules/$node/lib/${node}.js 2>/dev/null) ]]; then
     mkdir -p %{buildroot}%{_jsdir}/$node
     pushd node_modules/$node/lib
-    if [[ $(stat ${node}-min.js) ]]; then
+    if [[ $(stat ${node}-min.js 2>/dev/null) ]]; then
      mv ${node}-min.js ${node}-min.js.bak
      uglifyjs $node.js -o ${node}-min.js || mv ${node}-min.js.bak ${node}-min.js
-     if [ $(stat *.bak) ]]; then
+     if [ $(stat *.bak 2>/dev/null) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
-     if [[ $(stat ${node}*.map*) ]]; then
+     if [[ $(stat ${node}*.map* 2>/dev/null) ]]; then
          mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
      fi
    elif [[ $(stat ${node}.min.js) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
-     if [ $(stat *.bak) ]]; then
+     if [ $(stat *.bak 2>/dev/null) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
-     if [[ $(stat ${node}*.map*) ]]; then
+     if [[ $(stat ${node}*.map* 2>/dev/null) ]]; then
          mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
      fi
     fi
@@ -799,7 +799,7 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
     ln -sf %{_jsdir}/$node/$node.js $node.js
     popd
   fi
-   if [[ $(stat node_modules/$node/bin/$node) ]]; then
+   if [[ $(stat node_modules/$node/bin/$node 2>/dev/null) ]]; then
      if [[ $(readelf -h node_modules/$node/bin/$node 2>/dev/null) ]]; then
        cp -pr node_modules/$node %{buildroot}%{nodejs_sitearch}/$node
        ln -sf %{nodejs_sitearch}/$node/bin/$node %{buildroot}%{_bindir}/$node
@@ -814,20 +814,20 @@ done
 
 for atnode in $(ls node_modules | grep '@'); do
    for subnode in $(ls node_modules/$atnode); do
-    if [[ $(stat node_modules/$atnode/$subnode/${subnode}.js) ]]; then
+    if [[ $(stat node_modules/$atnode/$subnode/${subnode}.js 2>/dev/null) ]]; then
       mkdir -p %{buildroot}%{_jsdir}/$atnode/$subnode
       pushd node_modules/$atnode/$subnode
      if [[ $(stat ${subnode}-min.js) ]]; then
      mv ${subnode}-min.js ${subnode}-min.js.bak
      uglifyjs $subnode.js -o ${subnode}-min.js || mv ${subnode}-min.js.bak ${subnode}-min.js
-     if [[ $(stat *.bak) ]]; then
+     if [[ $(stat *.bak 2>/dev/null) ]]; then
       rm *.bak
      fi
      mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
-     if [[ $(stat ${subnode}*.map*) ]]; then
+     if [[ $(stat ${subnode}*.map* 2>/dev/null) ]]; then
          mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
      fi
-   elif [[ $(stat ${subnode}.min.js) ]]; then
+   elif [[ $(stat ${subnode}.min.js 2>/dev/null) ]]; then
      mv ${subnode}.min.js ${subnode}.min.js.bak
      uglifyjs $subnode.js -o ${subnode}.min.js || mv ${subnode}.min.js.bak ${subnode}.min.js
      if [[ $(stat *.bak) ]]; then
@@ -836,33 +836,33 @@ for atnode in $(ls node_modules | grep '@'); do
       mv ${subnode}.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
       ln -sf %{_jsdir}/$atnode/$subnode/$subnode.js $subnode.js
       popd
-    elif [[ $(stat node_modules/$atnode/$subnode/lib/${subnode}.js) ]]; then
+    elif [[ $(stat node_modules/$atnode/$subnode/lib/${subnode}.js 2>/dev/null) ]]; then
       mkdir -p %{buildroot}%{_jsdir}/$atnode/$subnode || :
       pushd node_modules/$atnode/$subnode/lib
-      if [[ $(stat ${subnode}-min.js) ]]; then
+      if [[ $(stat ${subnode}-min.js 2>/dev/null) ]]; then
       mv ${subnode}-min.js ${subnode}-min.js.bak
       uglifyjs $subnode.js -o ${subnode}-min.js || mv ${subnode}-min.js.bak ${subnode}-min.js
       if [[ $(stat *.bak) ]]; then
       rm *.bak
       fi
       mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
-       if [[ $(stat ${subnode}*.map*) ]]; then
+       if [[ $(stat ${subnode}*.map* 2>/dev/null) ]]; then
          mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
        fi
-   elif [[ $(stat ${subnode}.min.js) ]]; then
+   elif [[ $(stat ${subnode}.min.js 2>/dev/null) ]]; then
       mv ${subnode}.min.js ${subnode}.min.js.bak
       uglifyjs $subnode.js -o ${subnode}.min.js || mv ${subnode}.min.js.bak ${subnode}.min.js
       if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
       mv ${subnode}*.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
-      if [[ $(stat ${subnode}*.map*) ]]; then
+      if [[ $(stat ${subnode}*.map* 2>/dev/null) ]]; then
          mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
       fi
       ln -sf %{_jsdir}/$atnode/$subnode/$subnode.js $subnode.js
       popd
     fi
-     if [[ $(stat node_modules/$atnode/$subnode/bin/$subnode) ]]; then
+     if [[ $(stat node_modules/$atnode/$subnode/bin/$subnode 2>/dev/null) ]]; then
        if [[ $(readelf -h node_modules/$atnode/$subnode/bin/$subnode 2>/dev/null) ]]; then
          mkdir -p %{buildroot}%{nodejs_sitearch}/$atnode || :
          cp -pr node_modules/$atnode/$subnode %{buildroot}%{nodejs_sitearch}/$atnode/$subnode
