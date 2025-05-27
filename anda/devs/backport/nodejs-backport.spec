@@ -859,9 +859,11 @@ for atnode in $(ls node_modules | grep '@'); do
       if [[ $(stat ${subnode}*.map*) ]]; then
          mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
       fi
+   fi
       ln -sf %{_jsdir}/$atnode/$subnode/$subnode.js $subnode.js
       popd
     fi
+  fi
      if [[ $(stat node_modules/$atnode/$subnode/bin/$subnode) ]]; then
        if [[ $(readelf -h node_modules/$atnode/$subnode/bin/$subnode 2>/dev/null) ]]; then
          mkdir -p %{buildroot}%{nodejs_sitearch}/$atnode || :
