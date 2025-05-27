@@ -852,7 +852,7 @@ for atnode in $(ls node_modules | grep '@'); do
    elif [[ $(stat ${subnode}.min.js) ]]; then
       mv ${subnode}.min.js ${subnode}.min.js.bak
       uglifyjs $subnode.js -o ${subnode}.min.js || mv ${subnode}.min.js.bak ${subnode}.min.js
-      if [ $(stat *.bak) ]]; then
+      if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
       mv ${subnode}*.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
