@@ -790,7 +790,10 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
-     mv ${node}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$node
+     mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
+     if [[ $(stat ${node}*.map*) ]]; then
+         mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
+     fi
     fi
     mv ${node}.js -t %{buildroot}%{_jsdir}/$node
     ln -sf %{_jsdir}/$node/$node.js $node.js
@@ -822,7 +825,7 @@ for atnode in $(ls node_modules | grep '@'); do
      fi
      mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
      if [[ $(stat ${subnode}*.map*) ]]; then
-         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+         mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
      fi
    elif [[ $(stat ${subnode}.min.js) ]]; then
      mv ${subnode}.min.js ${subnode}.min.js.bak
@@ -844,7 +847,7 @@ for atnode in $(ls node_modules | grep '@'); do
       fi
       mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
        if [[ $(stat ${subnode}*.map*) ]]; then
-         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+         mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
        fi
    elif [[ $(stat ${subnode}.min.js) ]]; then
       mv ${subnode}.min.js ${subnode}.min.js.bak
@@ -854,7 +857,7 @@ for atnode in $(ls node_modules | grep '@'); do
      fi
       mv ${subnode}*.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
       if [[ $(stat ${subnode}*.map*) ]]; then
-         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+         mv ${subnode}*.map* -t %{buildroot}%{_jsdir}/$atnode/$subnode
       fi
       ln -sf %{_jsdir}/$atnode/$subnode/$subnode.js $subnode.js
       popd
