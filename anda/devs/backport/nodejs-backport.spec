@@ -750,7 +750,7 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
    if [[ $(stat ${node}-min.js 2>/dev/null) ]]; then
      mv ${node}-min.js ${node}-min.js.bak
      uglifyjs $node.js -o ${node}-min.js || mv ${node}-min.js.bak ${node}-min.js
-     if [ $(stat *.bak) ]]; then
+     if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
@@ -760,7 +760,7 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
    elif [[ $(stat ${node}.min.js 2>/dev/null) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
-     if [ $(stat *.bak) ]]; then
+     if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
@@ -777,7 +777,7 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
     if [[ $(stat ${node}-min.js 2>/dev/null) ]]; then
      mv ${node}-min.js ${node}-min.js.bak
      uglifyjs $node.js -o ${node}-min.js || mv ${node}-min.js.bak ${node}-min.js
-     if [ $(stat *.bak 2>/dev/null) ]]; then
+     if [[ $(stat *.bak 2>/dev/null) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
@@ -787,7 +787,7 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
    elif [[ $(stat ${node}.min.js) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
-     if [ $(stat *.bak 2>/dev/null) ]]; then
+     if [[ $(stat *.bak 2>/dev/null) ]]; then
       rm *.bak
      fi
      mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
