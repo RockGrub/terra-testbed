@@ -96,8 +96,8 @@
 %global color_string_desc Parser and generator for CSS color strings
 %global combined_stream_ver 1.0.8
 %global combined_stream_desc A stream that emits multiple other streams one after another.
-%global concat_map_ver 
-%global concat_map_desc The NodeJS concat-map package
+%global concat_map_ver 0.0.1
+%global concat_map_desc concatenative mapdashery
 %global console_log_level_ver 1.4.1
 %global console_log_level_desc The most simple logger imaginable
 %global cookie_ver 0.7.2
@@ -578,7 +578,6 @@ BuildRequires: nodejs-devel
 BuildRequires: nodejs-packaging
 BuildRequires: npm
 BuildRequires: uglify-js
-BuildRequires: web-assets-devel
 ExclusiveArch: %{nodejs_arches} noarch
 
 %description
@@ -705,7 +704,7 @@ BuildArch:      noarch
 %package -n     js-async-value
 
 %prep
-%autosetup -n %{srcmodule}/node_modules/%{srcmodule}
+%autosetup -n %{srcmodule}
 tar xjf %{SOURCE1}
 
 # Remove packages Fedora provides
@@ -753,14 +752,20 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
-     mv ${node}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$node
+     mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
+     if [[ $(stat ${node}*.map*) ]]; then
+         mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
+     fi
    elif [[ $(stat ${node}.min.js) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
-     mv ${node}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$node
+     mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
+     if [[ $(stat ${node}*.map*) ]]; then
+         mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
+     fi
    fi
    mv ${node}.js -t %{buildroot}%{_jsdir}/$node
    ln -sf %{_jsdir}/$node/$node.js $node.js
@@ -774,7 +779,10 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
      if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
-     mv ${node}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$node
+     mv ${node}*min.js -t %{buildroot}%{_jsdir}/$node
+     if [[ $(stat ${node}*.map*) ]]; then
+         mv ${node}*.map* -t %{buildroot}%{_jsdir}/$node
+     fi
    elif [[ $(stat ${node}.min.js) ]]; then
      mv ${node}.min.js ${node}.min.js.bak
      uglifyjs $node.js -o ${node}.min.js || mv ${node}.min.js.bak ${node}.min.js
@@ -808,14 +816,17 @@ for atnode in $(ls node_modules | grep '@'); do
      if [[ $(stat ${subnode}-min.js) ]]; then
      mv ${subnode}-min.js ${subnode}-min.js.bak
      uglifyjs $subnode.js -o ${subnode}-min.js || mv ${subnode}-min.js.bak ${subnode}-min.js
-     if [ $(stat *.bak) ]]; then
+     if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
-     mv ${subnode}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$atnode/$subnode
+     mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
+     if [[ $(stat ${subnode}*.map*) ]]; then
+         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+     fi
    elif [[ $(stat ${subnode}.min.js) ]]; then
      mv ${subnode}.min.js ${subnode}.min.js.bak
      uglifyjs $subnode.js -o ${subnode}.min.js || mv ${subnode}.min.js.bak ${subnode}.min.js
-     if [ $(stat *.bak) ]]; then
+     if [[ $(stat *.bak) ]]; then
       rm *.bak
      fi
       mv ${subnode}.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
@@ -827,17 +838,23 @@ for atnode in $(ls node_modules | grep '@'); do
       if [[ $(stat ${subnode}-min.js) ]]; then
       mv ${subnode}-min.js ${subnode}-min.js.bak
       uglifyjs $subnode.js -o ${subnode}-min.js || mv ${subnode}-min.js.bak ${subnode}-min.js
-      if [ $(stat *.bak) ]]; then
+      if [[ $(stat *.bak) ]]; then
       rm *.bak
       fi
-      mv ${subnode}*{min.js,.map*} -t %{buildroot}%{_jsdir}/$atnode/$subnode
+      mv ${subnode}*min.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
+       if [[ $(stat ${subnode}*.map*) ]]; then
+         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+       fi
    elif [[ $(stat ${subnode}.min.js) ]]; then
       mv ${subnode}.min.js ${subnode}.min.js.bak
       uglifyjs $subnode.js -o ${subnode}.min.js || mv ${subnode}.min.js.bak ${subnode}.min.js
       if [ $(stat *.bak) ]]; then
       rm *.bak
      fi
-      mv ${subnode}*{.js,.map*} -t %{buildroot}%{_jsdir}/$atnode/$subnode
+      mv ${subnode}*.js -t %{buildroot}%{_jsdir}/$atnode/$subnode
+      if [[ $(stat ${subnode}*.map*) ]]; then
+         mv ${subnode}*.map*) -t %{buildroot}%{_jsdir}/$atnode/$subnode
+      fi
       ln -sf %{_jsdir}/$atnode/$subnode/$subnode.js $subnode.js
       popd
     fi
@@ -940,5 +957,3 @@ NODE_ENV=test %{_bindir}/%{srcmodule} -R tests
 %doc node_modules/async/README.md
 %license node_modules/async/LICENSE
 %{nodejs_sitelib}/async/
-
-
