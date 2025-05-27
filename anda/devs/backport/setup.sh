@@ -86,5 +86,7 @@ rm -rf .nvm
 rm -rf node_modules
 rm -rfv *.json
 rm -rf $HOME/.npm*
+# Nuke Windows lines in the CI
+tr -d '\r' < ./*.spec > $(ls | grep .spec)
 popd
 exit 0
