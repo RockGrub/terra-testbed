@@ -578,6 +578,7 @@ BuildRequires: nodejs-devel
 BuildRequires: nodejs-packaging
 BuildRequires: npm
 BuildRequires: uglify-js
+BuildRequires: web-assets-devel
 ExclusiveArch: %{nodejs_arches} noarch
 
 %description
@@ -706,6 +707,8 @@ BuildArch:      noarch
 %prep
 %autosetup -n %{srcmodule}/node_modules
 tar xjf %{SOURCE1}
+
+ls
 
 # Remove packages Fedora provides
 rm -rf node_modules/{cjs-module-lexer,uglify-js}
