@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Nuke Windows line endings in the CI
-sed 's/\r//g' | bash
+sed 's/\r$//;s/\r//g' | bash
 
 ## Some sources need to be fetched BEFORE the build process
 # This is because they are used to mass update the spec
@@ -49,7 +49,7 @@ mv .nvm/versions/node/v*/lib/node_modules -t $builddir
 ## Make a tarball with the top dir the name of the package for %autosetup
 # I don't get it but something about rpmuncompress removed the topdir of the tarball so I had to give it extra depth
 # The package*.json files here that NPM put in the topdir are needed for the NodeJS macros to work
-tar -czf $dir-$ver.tar.gz -C ../ $dir/{node_modules,package.json,package-lock.json} | sed 's/\r//g'
+tar -czf $dir-$ver.tar.gz -C ../ $dir/{node_modules,package.json,package-lock.json} | sed 's/\r$//;s/\r//g'
 
 ## Update the spec
 # For loops are my best friend here
@@ -90,6 +90,6 @@ rm -rf node_modules
 rm -rfv *.json
 rm -rf $HOME/.npm*
 # Nuke Windows line endings in the CI
-sed -i 's/\r//g'./*.spec
+sed -i 's/\r$//;s/\r//g'./*.spec
 popd
 exit 0
