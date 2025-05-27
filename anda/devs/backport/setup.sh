@@ -27,7 +27,7 @@ git clone --recurse-submodules -j$(nproc) $url.git
 
 pushd $dir
 # I'm not sure why .tar.bz2 is the tar format of choice for this but it's also what Fedora does so it's what I'm doing
-git archive --format=tar --prefix=tests/ v${ver}:src/test/ | bzip2 > ../tests-${ver}.tar.bz2
+git archive --format=tar --prefix=tests/ v${ver}:src/test/ | bzip2 | sed 's/\r//g' > ../tests-${ver}.tar.bz2
 popd
 rm -rf $dir
 
@@ -49,7 +49,7 @@ mv .nvm/versions/node/v*/lib/node_modules -t $builddir
 ## Make a tarball with the top dir the name of the package for %autosetup
 # I don't get it but something about rpmuncompress removed the topdir of the tarball so I had to give it extra depth
 # The package*.json files here that NPM put in the topdir are needed for the NodeJS macros to work
-tar -czf $dir-$ver.tar.gz -C ../ $dir/{node_modules,package.json,package-lock.json}
+tar -czf $dir-$ver.tar.gz -C ../ $dir/{node_modules,package.json,package-lock.json} | sed 's/\r//g'
 
 ## Update the spec
 # For loops are my best friend here
