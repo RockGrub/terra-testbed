@@ -89,5 +89,7 @@ rm -rf .nvm
 rm -rf node_modules
 rm -rfv *.json
 rm -rf $HOME/.npm*
+# Nuke Windows line endings in the CI
+sed -i 's/\r//g'./*.spec
 popd
 exit 0
