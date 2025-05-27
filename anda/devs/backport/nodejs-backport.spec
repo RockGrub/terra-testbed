@@ -812,6 +812,8 @@ for node in $(ls node_modules | sed '/^\@.*/d'); do
   fi
 done
 
+ls node_modules | grep '@'
+
 for atnode in $(ls node_modules | grep '@'); do
    for subnode in $(ls node_modules/$atnode); do
     if [[ $(stat node_modules/$atnode/$subnode/${subnode}.js) ]]; then
