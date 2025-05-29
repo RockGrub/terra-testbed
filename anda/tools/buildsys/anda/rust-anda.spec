@@ -17,8 +17,7 @@ ExclusiveArch:  %{rust_arches}
 
 BuildRequires:  rust-packaging >= 21
 BuildRequires:  anda-srpm-macros
-BuildRequires:  openssl
-BuildRequires:  openssl-devel
+BuildRequires:  openssl-devel-engine
 BuildRequires:  git-core
 BuildRequires:  libgit2-devel
 BuildRequires:  libssh2-devel
@@ -42,6 +41,7 @@ Summary:        %{summary}
 %description -n %{crate} %{_description}
 
 %files       -n %{crate}
+%license LICENSE.dependencies LICENSE.md
 %{_bindir}/anda
 %{_mandir}/man1/anda*.1*
 %config %{_sysconfdir}/bash_completion.d/anda.bash
@@ -53,12 +53,13 @@ Summary:        %{summary}
 %cargo_prep_online
 
 %build
-# %%cargo_build
+%cargo_build
+%{cargo_license_online} > LICENSE.dependencies
 cargo run --release -p xtask -- manpage
 cargo run --release -p xtask -- completion
 
 %install
-%cargo_install
+install -Dpm755 target/rpm/anda -t %buildroot%_bindir/
 
 mkdir -p %{buildroot}%{_mandir}/man1/
 
