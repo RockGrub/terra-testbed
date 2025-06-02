@@ -27,6 +27,7 @@ BuildRequires:  cmake(OpenCV)
 BuildRequires:  cmake(Qt6Multimedia)
 BuildRequires:  cmake(Qt6Svg)
 BuildRequires:  pkgconfig(hidapi-hidraw)
+BuildRequires:  pkgconfig(rtmidi)
 BuildRequires:  pkgconfig(glslang)
 BuildRequires:  pkgconfig(sdl3)
 BuildRequires:  pkgconfig(sndio)
@@ -93,6 +94,7 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
     -DUSE_SYSTEM_GLSLANG=ON                              \
     -DUSE_SYSTEM_HIDAPI=ON                               \
     -DUSE_SYSTEM_CUBEB=ON                                \
+    -DUSE_SYSTEM_RTMIDI=ON                               \
     -DCMAKE_C_COMPILER=clang                             \
     -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
