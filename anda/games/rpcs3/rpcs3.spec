@@ -1,4 +1,4 @@
-%global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libasmjit\\.so.*)|(libcubeb\\.so.*)|(libdiscord-rpc\\.so.*)|(libglslang\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libSPIRV\\.so.*)|(libhidapi-hidraw\\.so.*)|(libpugixml\\.so.*))$
+%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libasmjit\\.so.*)|(libcubeb\\.so.*)|(libdiscord-rpc\\.so.*)|(libglslang\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libSPIRV\\.so.*)|(libhidapi-hidraw\\.so.*)|(libpugixml\\.so.*))$
 %global _distro_extra_cflags -Wno-uninitialized
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 # GLIBCXX_ASSERTIONS is known to break RPCS3
@@ -12,18 +12,24 @@
 
 Name:           rpcs3
 Version:        %(echo %{ver} | sed 's/-/^/g')
-Release:        4%?dist
+Release:        1%?dist
 Summary:        PlayStation 3 emulator and debugger
 License:        GPL-2.0-only
 URL:            https://github.com/RPCS3/rpcs3
 %dnl Source0:        %url/archive/refs/tags/v%version.tar.gz
 BuildRequires:  anda-srpm-macros glew openal-soft cmake vulkan-validation-layers git-core mold
 BuildRequires:  clang
+BuildRequires:  cmake(asmjit)
+BuildRequires:  cmake(cubeb)
 BuildRequires:  cmake(FAudio)
 BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
 BuildRequires:  cmake(Qt6Multimedia)
 BuildRequires:  cmake(Qt6Svg)
+BuildRequires:  pkgconfig(hidapi-hidraw)
+BuildRequires:  pkgconfig(rtmidi)
+BuildRequires:  pkgconfig(glslang)
+BuildRequires:  pkgconfig(yaml-cpp)
 BuildRequires:  pkgconfig(sdl3)
 BuildRequires:  pkgconfig(sndio)
 BuildRequires:  pkgconfig(jack)
@@ -54,6 +60,17 @@ BuildRequires:  pkgconfig(wayland-cursor)
 #BuildRequires:  pkgconfig(wayland-eglstream)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
+# Manually define the deps because RPM gets so confused about shared libs with this thing due to its weird mix of shared and native libs used at build time
+Requires:       asmjit
+Requires:       hidapi
+Requires:       glslang
+Requires:       spirv-tools-libs
+Requires:       rtmidi
+Requires:       pugixml
+# Weird dep but some parts of RPCS3 are development stuff
+Requires:       cubeb-devel
+Requires:       yaml-cpp
+
 
 %description
 %summary.
@@ -63,8 +80,6 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 
 %build
 # Looking at the CMakeLists.txt, this is the intended compiler and there are no fixes for GCC on aarch64
-export CC=clang
-export CXX=clang++
 %cmake -DDISABLE_LTO=TRUE                                \
      -DZSTD_BUILD_SHARED=OFF                             \
     -DZSTD_BUILD_STATIC=ON                               \
@@ -87,6 +102,13 @@ export CXX=clang++
     -DUSE_SYSTEM_FLATBUFFERS=OFF                         \
     -DUSE_SYSTEM_PUGIXML=OFF                             \
     -DUSE_SYSTEM_WOLFSSL=OFF                             \
+    -DUSE_SYSTEM_ASMJIT=ON                               \
+    -DUSE_SYSTEM_GLSLANG=ON                              \
+    -DUSE_SYSTEM_HIDAPI=ON                               \
+    -DUSE_SYSTEM_RTMIDI=ON                               \
+    -DUSE_SYSTEM_YAMLCPP=ON                              \
+    -DCMAKE_C_COMPILER=clang                             \
+    -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
     -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold" \
     -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold"    
