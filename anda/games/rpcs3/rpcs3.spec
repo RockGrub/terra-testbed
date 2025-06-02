@@ -66,7 +66,7 @@ Requires:       glslang
 Requires:       spirv-tools-libs
 Requires:       rtmidi
 Requires:       pugixml
-# Not just a devel package
+# Weird dep but some parts of RPCS3 are development stuff
 Requires:       cubeb-devel
 
 
