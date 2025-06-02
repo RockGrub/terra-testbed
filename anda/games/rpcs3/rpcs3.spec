@@ -1,4 +1,4 @@
-%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libasmjit\\.so.*)|(libcubeb\\.so.*)|(libdiscord-rpc\\.so.*)|(libglslang\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libSPIRV\\.so.*)|(libhidapi-hidraw\\.so.*)|(libpugixml\\.so.*))$
+%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libdiscord-rpc\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libpugixml\\.so.*))$
 %global _distro_extra_cflags -Wno-uninitialized
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 # GLIBCXX_ASSERTIONS is known to break RPCS3
@@ -26,6 +26,7 @@ BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
 BuildRequires:  cmake(Qt6Multimedia)
 BuildRequires:  cmake(Qt6Svg)
+BuildRequires:  pkgconfig(hidapi-hidraw)
 BuildRequires:  pkgconfig(glslang)
 BuildRequires:  pkgconfig(sdl3)
 BuildRequires:  pkgconfig(sndio)
@@ -90,6 +91,7 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
     -DUSE_SYSTEM_WOLFSSL=OFF                             \
     -DUSE_SYSTEM_ASMJIT=ON                               \
     -DUSE_SYSTEM_GLSLANG=ON                              \
+    -DUSE_SYSTEM_HIDAPI=ON                               \
     -DCMAKE_C_COMPILER=clang                             \
     -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
