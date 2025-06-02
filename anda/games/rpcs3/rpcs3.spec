@@ -29,6 +29,7 @@ BuildRequires:  cmake(Qt6Svg)
 BuildRequires:  pkgconfig(hidapi-hidraw)
 BuildRequires:  pkgconfig(rtmidi)
 BuildRequires:  pkgconfig(glslang)
+BuildRequires:  pkgconfig(yaml-cpp)
 BuildRequires:  pkgconfig(sdl3)
 BuildRequires:  pkgconfig(sndio)
 BuildRequires:  pkgconfig(jack)
@@ -104,6 +105,7 @@ Requires:       cubeb-devel
     -DUSE_SYSTEM_GLSLANG=ON                              \
     -DUSE_SYSTEM_HIDAPI=ON                               \
     -DUSE_SYSTEM_RTMIDI=ON                               \
+    -DUSE_SYSTEM_YAMLCPP=ON                              \
     -DCMAKE_C_COMPILER=clang                             \
     -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
