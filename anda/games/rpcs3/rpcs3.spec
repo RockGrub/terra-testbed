@@ -1,4 +1,4 @@
-%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libdiscord-rpc\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libpugixml\\.so.*))$
+%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libdiscord-rpc\\.so.*)|(libyaml-cpp\\.so.*)|(libpugixml\\.so.*))$
 %global _distro_extra_cflags -Wno-uninitialized
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 # GLIBCXX_ASSERTIONS is known to break RPCS3
