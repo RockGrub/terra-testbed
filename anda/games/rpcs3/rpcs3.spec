@@ -69,6 +69,7 @@ Requires:       rtmidi
 Requires:       pugixml
 # Weird dep but some parts of RPCS3 are development stuff
 Requires:       cubeb-devel
+Requires:       yaml-cpp
 
 
 %description
