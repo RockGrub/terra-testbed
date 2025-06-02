@@ -19,11 +19,14 @@ URL:            https://github.com/RPCS3/rpcs3
 %dnl Source0:        %url/archive/refs/tags/v%version.tar.gz
 BuildRequires:  anda-srpm-macros glew openal-soft cmake vulkan-validation-layers git-core mold
 BuildRequires:  clang
+BuildRequires:  cmake(asmjit)
+BuildRequires:  cmake(cubeb)
 BuildRequires:  cmake(FAudio)
 BuildRequires:  cmake(OpenAL)
 BuildRequires:  cmake(OpenCV)
 BuildRequires:  cmake(Qt6Multimedia)
 BuildRequires:  cmake(Qt6Svg)
+BuildRequires:  pkgconfig(glslang)
 BuildRequires:  pkgconfig(sdl3)
 BuildRequires:  pkgconfig(sndio)
 BuildRequires:  pkgconfig(jack)
@@ -63,8 +66,6 @@ BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-
 
 %build
 # Looking at the CMakeLists.txt, this is the intended compiler and there are no fixes for GCC on aarch64
-export CC=clang
-export CXX=clang++
 %cmake -DDISABLE_LTO=TRUE                                \
      -DZSTD_BUILD_SHARED=OFF                             \
     -DZSTD_BUILD_STATIC=ON                               \
@@ -87,6 +88,11 @@ export CXX=clang++
     -DUSE_SYSTEM_FLATBUFFERS=OFF                         \
     -DUSE_SYSTEM_PUGIXML=OFF                             \
     -DUSE_SYSTEM_WOLFSSL=OFF                             \
+    -DUSE_SYSTEM_ASMJIT=ON                               \
+    -DUSE_SYSTEM_CUBEB=ON                                \
+    -DUSE_SYSTEM_GLSLANG=ON                              \
+    -DCMAKE_C_COMPILER=clang                             \
+    -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
     -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold" \
     -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold"    
