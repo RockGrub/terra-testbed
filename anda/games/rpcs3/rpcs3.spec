@@ -1,4 +1,4 @@
-%dnl %global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libdiscord-rpc\\.so.*)|(libyaml-cpp\\.so.*)|(libpugixml\\.so.*))$
+%global __requires_exclude ^((libwolfssl\\.so.*)|(libFusion\\.so.*)|(libasmjit\\.so.*)|(libcubeb\\.so.*)|(libdiscord-rpc\\.so.*)|(libglslang\\.so.*)|(librtmidi\\.so.*)|(libyaml-cpp\\.so.*)|(libSPIRV\\.so.*)|(libhidapi-hidraw\\.so.*)|(libpugixml\\.so.*))$
 %global _distro_extra_cflags -Wno-uninitialized
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 # GLIBCXX_ASSERTIONS is known to break RPCS3
@@ -59,6 +59,16 @@ BuildRequires:  pkgconfig(wayland-cursor)
 #BuildRequires:  pkgconfig(wayland-eglstream)
 BuildRequires:  doxygen
 BuildRequires:  qt6-qtbase-private-devel vulkan-devel jack-audio-connection-kit-devel llvm-devel
+# Manually define the deps because RPM gets so confused about shared libs with this thing due to its weird mix of shared and native libs used at build time
+Requires:       asmjit
+Requires:       hidapi
+Requires:       glslang
+Requires:       spirv-tools-libs
+Requires:       rtmidi
+Requires:       pugixml
+# Not just a devel package
+Requires:       cubeb-devel
+
 
 %description
 %summary.
