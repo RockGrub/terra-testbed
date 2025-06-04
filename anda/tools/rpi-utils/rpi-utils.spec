@@ -1,12 +1,12 @@
-%global commit 657359cd6d6d8ebc6ba431750dc3c2c1d91fd707
-%global commit_date 20250523
+%global commit 71a596c8e62ff458e2760b558fb224bba41b3437
+%global commit_date 20250529
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 %define _unpackaged_files_terminate_build 0
 
 Name:			rpi-utils
 Version:		%{commit_date}.%{shortcommit}
-Release:		1%?dist
+Release:		2%?dist
 Summary:		A collection of scripts and simple applications for Raspberry Pi devices
 License:		BSD-3-Clause
 URL:			https://github.com/raspberrypi/utils
@@ -69,6 +69,8 @@ Summary:        A more powerful replacement for raspi-gpio, a tool for displayin
 %description    pinctrl
 %{summary}.
 
+%pkg_completion -Bn %name-pinctrl pinctrl
+
 %package        piolib
 Summary:        A library for accessing the Pi 5's PIO hardware
 %description    piolib
@@ -79,6 +81,8 @@ Summary:        Query the VideoCore for information
 %description    vcgencmd
 A command line utility that can get various pieces of information
 from the VideoCore GPU on the Raspberry Pi.
+
+%pkg_completion -Bn %name-vcgencmd vcgencmd
 
 %package        vcmailbox
 Summary:        Send messages to the VideoCore via the mailbox
@@ -143,7 +147,6 @@ Summary:        A tool to get VideoCore 'assert' or 'msg' logs with optional -f 
 %doc pinctrl/README.md
 %license LICENCE
 %{_bindir}/pinctrl
-%{_datadir}/bash-completion/completions/pinctrl
 %{_exec_prefix}/%{_lib}/libgpiolib.so.0
 %{_exec_prefix}/%{_lib}/libgpiolib.so
 
@@ -165,7 +168,6 @@ Summary:        A tool to get VideoCore 'assert' or 'msg' logs with optional -f 
 %license LICENCE
 %{_bindir}/vcgencmd
 %{_mandir}/man1/vcgencmd.1.gz
-%{_datadir}/bash-completion/completions/vcgencmd
 
 %files vclog
 %doc vclog/README.md

@@ -1,13 +1,14 @@
 #? https://github.com/flameshot-org/flameshot/blob/master/packaging/rpm/fedora/flameshot.spec
 
 %global ver v12.1.0
-%global commit 76f8067b2d69f847a1d858b9e4e16dbf402c8c13
+%global commit 94199582314e67f9b825a21c5c4108a4d5878909
 %global shortcommit %{sub %{commit} 1 7}
-%global commit_date 20250522
+%global commit_date 20250604
+%global devel_name QtColorWidgets
 
 Name:			flameshot.nightly
 Version:		%ver^%{commit_date}git.%shortcommit
-Release:		1%?dist
+Release:		2%?dist
 License:		GPL-3.0-or-later AND ASL-2.0 AND GPL-2.0-only AND LGPL-3.0-only AND FAL-1.3
 Summary:		Powerful yet simple to use screenshot software
 URL:			https://flameshot.org
@@ -56,33 +57,14 @@ Features:
  * Upload to Imgur
 
 
-%package bash-completion
-Summary:		Bash completion for %{name}
-Requires:		%{name} = %{version}-%{release}
-Requires: 		bash-completion
-Supplements:	(%{name} and bash-completion)
+%pkg_completion -Bfz flameshot
 
-%description bash-completion
-Bash command line completion support for %{name}.
+%package devel
+Summary:      Flameshot development files
+Requires:     %{name} = %{version}
 
-%package fish-completion
-Summary:		Fish completion for %{name}
-Requires:		%{name} = %{version}-%{release}
-Requires:		fish
-Supplements:	(%{name} and fish)
-
-%description fish-completion
-Fish command line completion support for %{name}.
-
-%package zsh-completion
-Summary:		Zsh completion for %{name}
-Requires:		%{name} = %{version}-%{release}
-Requires:		zsh
-Supplements:	(%{name} and zsh)
-
-%description zsh-completion
-Zsh command line completion support for %{name}.
-
+%description devel
+Development files for Flameshot.
 
 %prep
 %autosetup -p1 -n flameshot-%commit
@@ -110,6 +92,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %dir %{_datadir}/flameshot
 %dir %{_datadir}/flameshot/translations
 %{_bindir}/flameshot
+%{_libdir}/lib%{devel_name}.so.*
 %{_datadir}/applications/org.flameshot.Flameshot.desktop
 %{_metainfodir}/org.flameshot.Flameshot.metainfo.xml
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
@@ -118,11 +101,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/scalable/apps/*.svg
 %{_mandir}/man1/flameshot.1*
 
-%files bash-completion
-%{bash_completions_dir}/flameshot
-
-%files fish-completion
-%{fish_completions_dir}/flameshot.fish
-
-%files zsh-completion
-%{zsh_completions_dir}/_flameshot
+%files devel
+%{_libdir}/lib%{devel_name}.so
+%{_libdir}/cmake/%{devel_name}/
+%{_libdir}/pkgconfig/%{devel_name}.pc
+%{_includedir}/%{devel_name}/
