@@ -23,7 +23,7 @@ License:       GPL-3.0-only AND MIT AND BSD-3-Clause
 URL:           https://heroicgameslauncher.com
 BuildRequires: anda-srpm-macros
 BuildRequires: desktop-file-utils
-### Electron builder builds some things with GCC(++), Git, and Make
+# Electron builder builds some things with GCC(++), Git, and Make
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: git
@@ -75,13 +75,13 @@ mkdir -p %{buildroot}%{_bindir}
 # Make names executable
 ln -sr %{_datadir}/%{shortname}/%{shortname} %{buildroot}%{_bindir}/%{name}
 ln -sr %{_datadir}/%{shortname}/%{shortname} %{buildroot}%{_bindir}/%{shortname}
-install -Dm644 dist/.icon-set/icon_16x16.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_32x32.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_48x48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_64x64.png %{buildroot}%{_iconsdir}/hicolor/64x64/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_128x128.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_256x256.png %{buildroot}%{_iconsdir}/hicolor/256x256/apps/%{reverse_dns}.png
-install -Dm644 dist/.icon-set/icon_512x512.png %{buildroot}%{_iconsdir}/hicolor/512x512/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_16.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_32.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_64.png %{buildroot}%{_iconsdir}/hicolor/64x64/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_128.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_256.png %{buildroot}%{_iconsdir}/hicolor/256x256/apps/%{reverse_dns}.png
+install -Dm644 dist/.icon-set/icon_512.png %{buildroot}%{_iconsdir}/hicolor/512x512/apps/%{reverse_dns}.png
 install -Dm644 dist/.icon-set/icon_1024.png %{buildroot}%{_iconsdir}/hicolor/1024x1024/apps/%{reverse_dns}.png
 desktop-file-install --set-key=Exec --set-value="/usr/share/%{shortname}/%{shortname} %u" flatpak/%{reverse_dns}.desktop
 
