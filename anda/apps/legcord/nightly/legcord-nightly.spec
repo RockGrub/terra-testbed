@@ -34,7 +34,6 @@ mv dist/linux-unpacked/* -t %{buildroot}%{_datadir}/legcord
 
 mkdir -p %{buildroot}%{_bindir}
 ln -sf %{_datadir}/legcord/legcord %{buildroot}%{_bindir}/legcord
-install -Dm644 legcord.desktop %{buildroot}/usr/share/applications/legcord.desktop
 install -Dm644 dist/.icon-set/icon_16.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/legcord.png
 install -Dm644 dist/.icon-set/icon_32.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/legcord.png
 install -Dm644 dist/.icon-set/icon_48x48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/legcord.png
