@@ -30,7 +30,11 @@ pnpm run package --linux AppImage tar.gz
 
 %install
 mkdir -p %{buildroot}%{_datadir}/legcord
+%ifarch aarch64
+mv dist/linux-arm64-unpacked/* %{buildroot}%{_datadir}/legcord
+%else
 mv dist/linux-unpacked/* -t %{buildroot}%{_datadir}/legcord
+%endif
 
 mkdir -p %{buildroot}%{_bindir}
 ln -sf %{_datadir}/legcord/legcord %{buildroot}%{_bindir}/legcord
