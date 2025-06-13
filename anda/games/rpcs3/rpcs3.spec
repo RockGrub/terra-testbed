@@ -87,6 +87,8 @@ export CXX=clang++
     -DUSE_SYSTEM_FLATBUFFERS=OFF                         \
     -DUSE_SYSTEM_PUGIXML=OFF                             \
     -DUSE_SYSTEM_WOLFSSL=OFF                             \
+    -DCMAKE_C_COMPILER=clang                             \
+    -DCMAKE_CXX_COMPILER=clang++                         \
     -DCMAKE_LINKER=mold                                  \
     -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold" \
     -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -fuse-ld=mold"    
