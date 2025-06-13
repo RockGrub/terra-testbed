@@ -1,4 +1,3 @@
-%global __requires_exclude ^((libwolfssl\\.so.*))$
 %global _distro_extra_cflags -Wno-uninitialized
 %global _distro_extra_cxxflags -include %_includedir/c++/*/cstdint
 # GLIBCXX_ASSERTIONS is known to break RPCS3
