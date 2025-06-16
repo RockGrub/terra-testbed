@@ -41,12 +41,6 @@ jobs:
           git merge --no-edit upstream/f41
           git push origin f41
 
-          git fetch upstream f40
-
-          git checkout --track origin/f40
-          git merge --no-edit upstream/f40
-          git push origin f40
-
           git fetch upstream el10
 
           git checkout --track origin/el10
