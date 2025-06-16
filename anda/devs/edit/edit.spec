@@ -1,7 +1,7 @@
 %global _description %{expand:
 An editor that pays homage to the classic MS-DOS Editor, but with a modern interface and input controls similar to VS Code.}
 %global crate edit
-%bcond rust_nightly 1
+%bcond rust_nightly 0
 %if %{with rust_nightly}
 %define __cargo /usr/bin/env CARGO_HOME=.cargo RUSTC_BOOTSTRAP=1 RUSTFLAGS='%{build_rustflags}' $HOME/.cargo/bin/cargo
 %define __rustc $HOME/.cargo/bin/rustc
