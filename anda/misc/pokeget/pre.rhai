@@ -1,1 +1,1 @@
-sh("dnf5 config-manager setopt fedora-cisco-openh264.enabled=1", #{});
+sh("stat /etc/yum.repos.d/fedora-cisco-openh264.repo", #{});
