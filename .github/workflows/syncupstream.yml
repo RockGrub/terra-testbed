@@ -24,7 +24,6 @@ jobs:
       
           - name: Merge main
             run: |
-              git pull
               git fetch upstream frawhide
 
               git switch -c origin/main
@@ -35,7 +34,7 @@ jobs:
             run: |
               git fetch upstream frawhide
 
-              git switch -c origin/frawhide
+              git checkout --track origin/frawhide
               git merge --no-edit upstream/frawhide
               git push origin frawhide
 
@@ -43,7 +42,7 @@ jobs:
             run: |
               git fetch upstream f42
 
-              git switch -c origin/f42
+              git checkout --track origin/f42
               git merge --no-edit upstream/f42
               git push origin f42
 
@@ -51,7 +50,7 @@ jobs:
             run: |
               git fetch upstream f41
 
-              git switch -c origin/f41
+              git checkout --track origin/f41
               git merge --no-edit upstream/f41
               git push origin f41
 
@@ -59,6 +58,6 @@ jobs:
             run: |
               git fetch upstream el10
 
-              git switch -c origin/el10
+              git checkout --track origin/el10
               git merge --no-edit upstream/el10
               git push origin el10
