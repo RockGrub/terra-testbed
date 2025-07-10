@@ -11,8 +11,8 @@ jobs:
       runs-on: ubuntu-latest
       steps:
           - uses: actions/checkout@v4
-      
-          - name: Merge main
+
+          - name: Set up upstream
             run: |
               git config --global user.name 'GildedRoach'
               git config --global user.email 'rockgrub@disroot.org'
@@ -21,6 +21,10 @@ jobs:
               git pull --unshallow
                                
               git remote add upstream https://github.com/terrapkg/packages
+      
+          - name: Merge main
+            run: |
+              git pull
               git fetch upstream frawhide
 
               git checkout main
@@ -29,13 +33,7 @@ jobs:
 
           - name: Merge frawhide
             run: |
-              git config --global user.name 'GildedRoach'
-              git config --global user.email 'rockgrub@disroot.org'
-              git config --global merge.ours.driver true
-
               git pull
-
-              git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream frawhide
 
               git checkout frawhide
@@ -44,13 +42,7 @@ jobs:
 
           - name: Merge f42
             run: |
-              git config --global user.name 'GildedRoach'
-              git config --global user.email 'rockgrub@disroot.org'
-              git config --global merge.ours.driver true
-
               git pull
-
-              git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream f42
 
               git checkout f42
@@ -59,13 +51,7 @@ jobs:
 
           - name: Merge f41
             run: |
-              git config --global user.name 'GildedRoach'
-              git config --global user.email 'rockgrub@disroot.org'
-              git config --global merge.ours.driver true
-
               git pull
-
-              git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream f41
 
               git checkout f41
@@ -74,13 +60,7 @@ jobs:
 
           - name: Merge el10
             run: |
-              git config --global user.name 'GildedRoach'
-              git config --global user.email 'rockgrub@disroot.org'
-              git config --global merge.ours.driver true
-
-              git pull --unshallow
-
-              git remote add upstream https://github.com/terrapkg/packages
+              git pull
               git fetch upstream el10
 
               git checkout el10
