@@ -33,7 +33,6 @@ jobs:
 
           - name: Merge frawhide
             run: |
-              git pull --no-edit upstream/frawhide
               git fetch upstream frawhide
 
               git switch -c origin/frawhide
@@ -42,7 +41,6 @@ jobs:
 
           - name: Merge f42
             run: |
-              git pull --no-edit upstream/f42
               git fetch upstream f42
 
               git switch -c origin/f42
@@ -51,7 +49,6 @@ jobs:
 
           - name: Merge f41
             run: |
-              git pull --no-edit upstream/f42
               git fetch upstream f41
 
               git switch -c origin/f41
@@ -60,7 +57,6 @@ jobs:
 
           - name: Merge el10
             run: |
-              git pull --no-edit upstream/el10
               git fetch upstream el10
 
               git switch -c origin/el10
