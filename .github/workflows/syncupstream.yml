@@ -84,6 +84,6 @@ jobs:
               git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream el10
 
-          git checkout el10
-          git merge --no-edit upstream/el10
-          git push origin el10
+              git checkout el10
+              git merge --no-edit upstream/el10
+              git push origin el10
