@@ -1,4 +1,6 @@
 name: Merge upstream branches
+permissions:
+  contents: write
 
 on:
   schedule:
