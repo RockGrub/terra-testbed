@@ -7,10 +7,12 @@ on:
 
 jobs:
   merge:
+    name: Merge upstream branches
     runs-on: ubuntu-latest
     steps:
-      - name: Merge main
       - uses: actions/checkout@v4
+      
+      - name: Merge main
         run: |
           git config --global user.name 'GildedRoach'
           git config --global user.email 'rockgrub@disroot.org'
@@ -26,7 +28,6 @@ jobs:
           git push origin main
 
       - name: Merge frawhide
-      - uses: actions/checkout@v4
         run: |
           git config --global user.name 'GildedRoach'
           git config --global user.email 'rockgrub@disroot.org'
@@ -42,7 +43,6 @@ jobs:
           git push origin frawhide
 
       - name: Merge f42
-      - uses: actions/checkout@v4
         run: |
           git config --global user.name 'GildedRoach'
           git config --global user.email 'rockgrub@disroot.org'
@@ -58,7 +58,6 @@ jobs:
           git push origin f42
 
       - name: Merge f41
-      - uses: actions/checkout@v4
         run: |
           git config --global user.name 'GildedRoach'
           git config --global user.email 'rockgrub@disroot.org'
