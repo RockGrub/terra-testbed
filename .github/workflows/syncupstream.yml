@@ -43,6 +43,6 @@ jobs:
               fi
               git fetch upstream $upstream
 
-              git switch -c origin/$branch
+              git checkout origin/$branch
               git merge --no-edit upstream/$upstream
               git push origin $branch
