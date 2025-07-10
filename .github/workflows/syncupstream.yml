@@ -73,7 +73,6 @@ jobs:
               git push origin f41
 
           - name: Merge el10
-          - uses: actions/checkout@v4
             run: |
               git config --global user.name 'GildedRoach'
               git config --global user.email 'rockgrub@disroot.org'
