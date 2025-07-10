@@ -33,7 +33,7 @@ jobs:
               git config --global user.email 'rockgrub@disroot.org'
               git config --global merge.ours.driver true
 
-              git pull --unshallow
+              git pull
 
               git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream frawhide
@@ -48,7 +48,7 @@ jobs:
               git config --global user.email 'rockgrub@disroot.org'
               git config --global merge.ours.driver true
 
-              git pull --unshallow
+              git pull
 
               git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream f42
@@ -63,7 +63,7 @@ jobs:
               git config --global user.email 'rockgrub@disroot.org'
               git config --global merge.ours.driver true
 
-              git pull --unshallow
+              git pull
 
               git remote add upstream https://github.com/terrapkg/packages
               git fetch upstream f41
