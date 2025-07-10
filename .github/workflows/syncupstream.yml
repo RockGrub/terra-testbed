@@ -9,8 +9,19 @@ jobs:
   merge:
       name: Merge upstream branches
       runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          branch:
+            - main
+            - frawhide
+            - f42
+            - f41
+            - el10
+       
       steps:
           - uses: actions/checkout@v4
+            with:
+              ref: ${{ matrix.branch }}
 
           - name: Set up upstream
             run: |
@@ -22,47 +33,16 @@ jobs:
                                
               git remote add upstream https://github.com/terrapkg/packages
       
-          - name: Merge main
+          - name: Merge branch
             run: |
-              git pull
-              git fetch upstream frawhide
+              branch=${{ matrix.branch }}
+              if [ "$branch" == 'main' ]; then
+                upstream=frawhide
+              else
+                upstream=$branch
+              fi
+              git fetch upstream $upstream
 
-              git switch -c origin/main
-              git merge --no-edit upstream/frawhide
-              git push origin main
-
-          - name: Merge frawhide
-            run: |
-              git pull
-              git fetch upstream frawhide
-
-              git switch -c origin/frawhide
-              git merge --no-edit upstream/frawhide
-              git push origin frawhide
-
-          - name: Merge f42
-            run: |
-              git pull
-              git fetch upstream f42
-
-              git switch -c origin/f42
-              git merge --no-edit upstream/f42
-              git push origin f42
-
-          - name: Merge f41
-            run: |
-              git pull
-              git fetch upstream f41
-
-              git switch -c origin/f41
-              git merge --no-edit upstream/f41
-              git push origin f41
-
-          - name: Merge el10
-            run: |
-              git pull
-              git fetch upstream el10
-
-              git switch -c origin/el10
-              git merge --no-edit upstream/el10
-              git push origin el10
+              git switch -c origin/$branch
+              git merge --no-edit upstream/$upstream
+              git push origin $branch
