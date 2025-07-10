@@ -27,7 +27,7 @@ jobs:
               git pull
               git fetch upstream frawhide
 
-              git checkout origin/main
+              git switch -c origin/main
               git merge --no-edit upstream/frawhide
               git push origin main
 
@@ -36,7 +36,7 @@ jobs:
               git pull
               git fetch upstream frawhide
 
-              git checkout origin/frawhide
+              git switch -c origin/frawhide
               git merge --no-edit upstream/frawhide
               git push origin frawhide
 
@@ -45,7 +45,7 @@ jobs:
               git pull
               git fetch upstream f42
 
-              git checkout origin/f42
+              git switch -c origin/f42
               git merge --no-edit upstream/f42
               git push origin f42
 
@@ -54,7 +54,7 @@ jobs:
               git pull
               git fetch upstream f41
 
-              git checkout origin/f41
+              git switch -c origin/f41
               git merge --no-edit upstream/f41
               git push origin f41
 
@@ -63,6 +63,6 @@ jobs:
               git pull
               git fetch upstream el10
 
-              git checkout origin/el10
+              git switch -c origin/el10
               git merge --no-edit upstream/el10
               git push origin el10
