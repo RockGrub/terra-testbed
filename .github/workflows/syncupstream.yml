@@ -30,7 +30,7 @@ jobs:
             run: |
               git fetch upstream frawhide
 
-              git checkout --track origin/main
+              git checkout origin/main
               git merge --no-edit upstream/frawhide
               git push origin main
 
