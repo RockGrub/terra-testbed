@@ -1,6 +1,4 @@
 name: Merge upstream branches
-permissions:
-  contents: write
 
 on:
   schedule:
@@ -11,10 +9,19 @@ jobs:
   merge:
       name: Merge upstream branches
       runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          branch:
+            - main
+            - frawhide
+            - f42
+            - f41
+            - el10
+       
       steps:
           - uses: actions/checkout@v4
             with:
-              token: ${{ secrets.WORKFLOW_TOKEN }}
+              ref: ${{ matrix.branch }}
 
           - name: Set up upstream
             run: |
@@ -26,41 +33,15 @@ jobs:
                                
               git remote add upstream https://github.com/terrapkg/packages
       
-          - name: Merge main
+          - name: Merge branch
             run: |
-              git fetch upstream frawhide
-
-              git merge --no-edit upstream/frawhide
-              git push origin main
-
-          - name: Merge frawhide
-            run: |
-              git fetch upstream frawhide
-
-              git checkout --track origin/frawhide
-              git merge --no-edit upstream/frawhide
-              git push origin frawhide
-
-          - name: Merge f42
-            run: |
-              git fetch upstream f42
-
-              git checkout --track origin/f42
-              git merge --no-edit upstream/f42
-              git push origin f42
-
-          - name: Merge f41
-            run: |
-              git fetch upstream f41
-
-              git checkout --track origin/f41
-              git merge --no-edit upstream/f41
-              git push origin f41
-
-          - name: Merge el10
-            run: |
-              git fetch upstream el10
-
-              git checkout --track origin/el10
-              git merge --no-edit upstream/el10
-              git push origin el10
+              branch=${{ matrix.branch }}
+              if [ "$branch" == 'main' ]; then
+                upstream=frawhide
+              else
+                upstream=$branch
+              fi
+              
+              git fetch upstream $upstream
+              git merge --no-edit upstream/$upstream
+              git push origin $branch
