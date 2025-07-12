@@ -8,8 +8,8 @@ Summary:        A series of patches that make curl requests look like Chrome
 License:        MIT
 URL:            https://github.com/lexiforest/curl-impersonate
 Source0:        %{url}/archive/v%{version}.tar.gz
-Patch0:         remove-werror-in-boringssl-build.patch
-Patch1:         install-sh-scripts-to-buildroot.patch
+%dnl Patch0:         remove-werror-in-boringssl-build.patch
+%dnl Patch1:         install-sh-scripts-to-buildroot.patch
 
 Packager:       sadlerm <lerm@chromebooks.lol>
 
@@ -19,6 +19,8 @@ BuildRequires:  golang
 BuildRequires:  unzip
 BuildRequires:  zlib-ng-compat-devel
 BuildRequires:  zstd libzstd-devel
+BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(libpsl)
 
 %global _description %{expand:
 A special build of curl that can impersonate Chrome, Edge and Safari. curl-impersonate is able to perform TLS and HTTP handshakes that are identical to that of a real browser.
