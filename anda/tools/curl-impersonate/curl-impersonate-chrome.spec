@@ -21,6 +21,7 @@ BuildRequires:  zlib-ng-compat-devel
 BuildRequires:  zstd libzstd-devel
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(libpsl)
+BuildRequires:  mingw64-openssl-static
 
 %global _description %{expand:
 A special build of curl that can impersonate Chrome, Edge and Safari. curl-impersonate is able to perform TLS and HTTP handshakes that are identical to that of a real browser.
