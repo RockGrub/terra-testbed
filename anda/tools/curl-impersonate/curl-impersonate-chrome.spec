@@ -8,7 +8,7 @@ Summary:        A series of patches that make curl requests look like Chrome
 License:        MIT
 URL:            https://github.com/lexiforest/curl-impersonate
 Source0:        %{url}/archive/v%{version}.tar.gz
-%dnl Patch0:         remove-werror-in-boringssl-build.patch
+Patch0:         remove-werror-in-boringssl-build.patch
 %dnl Patch1:         install-sh-scripts-to-buildroot.patch
 
 Packager:       sadlerm <lerm@chromebooks.lol>
